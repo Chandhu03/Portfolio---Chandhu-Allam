@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Chandhu Allam</title>
+  <defs>
+    <linearGradient id="mark" x1="120" y1="96" x2="408" y2="416" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#0B1120"/>
+  <rect x="56" y="56" width="400" height="400" rx="88" fill="none" stroke="#2563EB" stroke-opacity=".35" stroke-width="16"/>
+  <path d="M241 163c-23-17-50-26-79-26-73 0-132 59-132 132s59 132 132 132c29 0 56-9 79-26" fill="none" stroke="#F8FAFC" stroke-linecap="round" stroke-width="42"/>
+  <path d="m282 370 62-203 62 203M307 292h74" fill="none" stroke="url(#mark)" stroke-linecap="round" stroke-linejoin="round" stroke-width="34"/>
+</svg>
