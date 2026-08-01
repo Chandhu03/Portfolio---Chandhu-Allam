@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ECE 570 Digital Forensics: investigations spanning malware analysis, memory forensics, incident response, and defensible evidence collection.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0B1120">
+  <meta name="color-scheme" content="dark">
+  <title>ECE 570 Digital Forensics | Chandhu Allam</title>
+  <link rel="canonical" href="ece-570-digital-forensics.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="ECE 570 Digital Forensics | Chandhu Allam">
+  <meta property="og:description" content="Investigations spanning malware analysis, memory forensics, incident response, and evidence collection.">
+  <meta property="og:url" content="ece-570-digital-forensics.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ECE 570 Digital Forensics | Chandhu Allam">
+  <meta name="twitter:description" content="Investigations spanning malware analysis, memory forensics, incident response, and evidence collection.">
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="case-page">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../index.html#home" aria-label="Chandhu Allam — home">
+        <span class="brand-mark" aria-hidden="true">CA</span>
+        <span>Chandhu Allam</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
+        <a href="../index.html#home">Home</a>
+        <a href="../index.html#about">About</a>
+        <a class="is-active" href="../projects.html" aria-current="page">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="case-hero" aria-labelledby="case-title">
+      <div class="shell">
+        <a class="case-back" href="../projects.html"><span aria-hidden="true">←</span> Back to projects</a>
+
+        <div class="case-hero-grid">
+          <div>
+            <p class="case-label">Digital Forensics · Malware Analysis</p>
+            <h1 id="case-title">ECE 570 Digital Forensics</h1>
+            <p class="case-summary">Collection of digital forensic investigations involving malware analysis, memory forensics, incident response, and evidence collection.</p>
+            <div class="case-meta">
+              <span>University of Victoria</span>
+              <span>ECE 570</span>
+              <span>Graduate coursework</span>
+            </div>
+            <div class="case-actions" data-google-doc="ece-570-digital-forensics" data-doc-class="button button-secondary">
+              <a class="button button-secondary" href="https://github.com/Chandhu03" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in a new tab)">GitHub <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+
+          <div class="case-hero-art project-card-media art-forensics">
+            <span class="project-visual-glyph" aria-hidden="true"><span>⌕</span></span>
+            <span class="project-visual-detail" aria-hidden="true"></span>
+            <span class="project-visual-detail is-alt" aria-hidden="true"></span>
+            <span class="project-art-label">Evidence &amp; analysis</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell case-layout">
+        <div class="case-main">
+          <section class="case-section" id="overview" aria-labelledby="overview-title">
+            <p class="eyebrow">01 — Overview</p>
+            <h2 id="overview-title">Overview</h2>
+            <p>ECE 570 is a graduate digital forensics course built around hands-on investigations rather than theory alone. The work spans several distinct disciplines that share one requirement: whatever you conclude has to be supportable by evidence that has not been altered by the act of examining it.</p>
+            <p>Across the investigations I worked through malware behaviour analysis, memory image examination, incident response sequencing, and the acquisition and handling of evidence. Each one produced a written finding that had to stand up to being questioned.</p>
+            <div class="story-callout">Forensics taught me a discipline that transfers directly into engineering: separate what you observed from what you inferred, and never present the second as the first.</div>
+          </section>
+
+          <section class="case-section" id="problem" aria-labelledby="problem-title">
+            <p class="eyebrow">02 — Problem</p>
+            <h2 id="problem-title">Problem statement</h2>
+            <p>Digital evidence is fragile in a way that physical evidence is not. Memory disappears at power-off, timestamps update when a file is opened, and a careless acquisition can destroy the very artefact being sought. At the same time, the analysis has to be thorough enough to reconstruct what actually happened.</p>
+            <p>Malware compounds the difficulty. Modern samples actively resist inspection — detecting virtual machines, obfuscating strings, delaying execution, and unpacking themselves only at runtime. The investigator's task is to characterise behaviour accurately without letting the sample escape containment or mislead the analysis.</p>
+          </section>
+
+          <section class="case-section" id="objectives" aria-labelledby="objectives-title">
+            <p class="eyebrow">03 — Objectives</p>
+            <h2 id="objectives-title">Objectives</h2>
+            <ul class="case-list">
+              <li><strong>Acquire evidence without altering it</strong>, using verified imaging and hash-based integrity checks before and after acquisition.</li>
+              <li><strong>Maintain a defensible chain of custody</strong> so that every artefact can be traced from source to finding.</li>
+              <li><strong>Analyse volatile memory</strong> to recover process state, network activity, and injected code that a disk image alone would not reveal.</li>
+              <li><strong>Characterise malware behaviour</strong> through both static inspection and controlled dynamic execution in an isolated lab.</li>
+              <li><strong>Correlate artefacts into a timeline</strong> that explains a sequence of events rather than a list of disconnected observations.</li>
+              <li><strong>Produce reports that separate fact from inference</strong> and state confidence honestly, including where evidence was inconclusive.</li>
+            </ul>
+          </section>
+
+          <section class="case-section" id="technologies" aria-labelledby="technologies-title">
+            <p class="eyebrow">04 — Stack</p>
+            <h2 id="technologies-title">Technologies used</h2>
+            <div class="stack-grid">
+              <div class="stack-item"><h3>Volatility</h3><p>Memory image analysis — process listings, injected code, and network artefacts.</p></div>
+              <div class="stack-item"><h3>Autopsy / Sleuth Kit</h3><p>Disk image examination, file system timelines, and deleted-file recovery.</p></div>
+              <div class="stack-item"><h3>Wireshark</h3><p>Packet capture review and reconstruction of network behaviour.</p></div>
+              <div class="stack-item"><h3>Static analysis tooling</h3><p>String extraction, header and import inspection, and hashing utilities.</p></div>
+              <div class="stack-item"><h3>Isolated VM lab</h3><p>Snapshot-based sandbox for controlled detonation and rollback.</p></div>
+              <div class="stack-item"><h3>Linux</h3><p>Command-line forensics utilities and scripted evidence processing.</p></div>
+            </div>
+          </section>
+
+          <section class="case-section" id="role" aria-labelledby="role-title">
+            <p class="eyebrow">05 — Ownership</p>
+            <h2 id="role-title">My role</h2>
+            <p>I carried out the investigations myself, from acquisition through analysis to the written finding. That included setting up and isolating the analysis environment, deciding acquisition order based on artefact volatility, running the examinations, and interpreting the results.</p>
+            <p>The reporting was as much a deliverable as the analysis. Each investigation had to be written so that another examiner could follow the method, reproduce the steps, and reach their own conclusion about whether mine was justified.</p>
+          </section>
+
+          <section class="case-section" id="implementation" aria-labelledby="implementation-title">
+            <p class="eyebrow">06 — Approach</p>
+            <h2 id="implementation-title">Implementation summary</h2>
+            <p>Every investigation followed the same sequence, which is the point — consistency is what makes findings comparable and defensible.</p>
+            <ul class="case-list">
+              <li><strong>Prepare and isolate.</strong> Stand up a clean, network-isolated environment with snapshots so any change can be rolled back.</li>
+              <li><strong>Acquire in order of volatility.</strong> Capture memory before disk, hashing the image immediately so integrity can be re-verified at any later point.</li>
+              <li><strong>Triage.</strong> Establish scope quickly — what system, what timeframe, what question is actually being asked.</li>
+              <li><strong>Examine memory.</strong> Recover running processes, loaded modules, network connections, and signs of injection or hollowing.</li>
+              <li><strong>Examine storage.</strong> Build file system timelines, recover deleted artefacts, and inspect persistence locations.</li>
+              <li><strong>Analyse the sample.</strong> Start static — strings, headers, imports — then move to controlled execution, observing changes against the clean snapshot.</li>
+              <li><strong>Correlate and report.</strong> Assemble a timeline, mark each entry as observed or inferred, and document limitations.</li>
+            </ul>
+          </section>
+
+          <section class="case-section" id="challenges" aria-labelledby="challenges-title">
+            <p class="eyebrow">07 — Friction</p>
+            <h2 id="challenges-title">Challenges</h2>
+            <div class="challenge-grid">
+              <article class="challenge-card"><h3>Anti-analysis behaviour</h3><p>Samples that detect a virtual machine, stall execution, or unpack only at runtime will show benign behaviour to a careless analyst. Recognising the absence of behaviour as a finding in itself took practice.</p></article>
+              <article class="challenge-card"><h3>Volatility of evidence</h3><p>Memory contents are gone the moment a system is powered down. Acquisition order is a decision made under time pressure, and getting it wrong is unrecoverable.</p></article>
+              <article class="challenge-card"><h3>Correlating across sources</h3><p>Disk, memory, and network artefacts each tell a partial story with their own clock. Reconciling them into a single defensible timeline was consistently the hardest part.</p></article>
+              <article class="challenge-card"><h3>Containment discipline</h3><p>Running live malware safely demands rigour about isolation, snapshots, and cleanup. One shortcut compromises both the lab and the credibility of the findings.</p></article>
+            </div>
+          </section>
+
+          <section class="case-section" id="learnings" aria-labelledby="learnings-title">
+            <p class="eyebrow">08 — Takeaways</p>
+            <h2 id="learnings-title">Key learnings</h2>
+            <ul class="case-list">
+              <li><strong>Method is the deliverable.</strong> A correct conclusion reached through an undocumented process is not a usable finding.</li>
+              <li><strong>Observation and inference are different things.</strong> Writing them in separate registers is what makes a report defensible under challenge.</li>
+              <li><strong>Integrity checks are cheap and non-negotiable.</strong> Hashing at acquisition costs seconds and is the difference between evidence and an anecdote.</li>
+              <li><strong>Absence of evidence needs stating.</strong> "I looked here and found nothing" is a result worth recording, not a gap to skip over.</li>
+              <li><strong>Attacker perspective sharpens defence.</strong> Watching how malware establishes persistence changed how I think about hardening the systems I build.</li>
+            </ul>
+          </section>
+
+          <section class="case-section" id="future" aria-labelledby="future-title">
+            <p class="eyebrow">09 — Next</p>
+            <h2 id="future-title">Future improvements</h2>
+            <ul class="case-list">
+              <li><strong>Scripted acquisition</strong> — automate the repetitive parts of evidence collection to reduce the chance of human error under pressure.</li>
+              <li><strong>Deeper reverse engineering</strong> — move from behavioural characterisation toward disassembly-level analysis of packed samples.</li>
+              <li><strong>Timeline automation</strong> — build tooling that normalises timestamps across disk, memory, and network sources.</li>
+              <li><strong>Detection feedback loop</strong> — translate observed indicators into detection rules, connecting forensics back to prevention.</li>
+              <li><strong>Reporting templates</strong> — standardise the structure so findings stay consistent across investigations and investigators.</li>
+            </ul>
+          </section>
+
+          <section class="case-section" id="skills" aria-labelledby="skills-title">
+            <p class="eyebrow">10 — Capability</p>
+            <h2 id="skills-title">Skills demonstrated</h2>
+            <div class="chip-list chip-list-lg" aria-label="Skills demonstrated">
+              <span>Memory forensics</span><span>Malware analysis</span><span>Incident response</span><span>Evidence handling</span><span>Chain of custody</span><span>Network analysis</span><span>Timeline reconstruction</span><span>Linux</span><span>Investigative reporting</span>
+            </div>
+
+            <div class="resource-panel">
+              <div>
+                <h3>Project resources</h3>
+                <p>Investigation write-ups involve course-supplied evidence and samples, so material will be published only where coursework and handling policy allow.</p>
+              </div>
+              <div class="resource-links" data-google-doc="ece-570-digital-forensics" data-doc-class="resource-link">
+                <a class="resource-link" href="https://github.com/Chandhu03" target="_blank" rel="noopener noreferrer">GitHub profile <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+              </div>
+            </div>
+          </section>
+
+          <section class="case-section" id="related" aria-labelledby="related-title">
+            <p class="eyebrow">More work</p>
+            <h2 id="related-title">Related projects</h2>
+            <div class="related-grid">
+              <a class="related-card" href="ece-567-capstone.html"><p>AI · Security</p><h3>ECE 567 Capstone Project</h3></a>
+              <a class="related-card" href="iot-intrusion-detection.html"><p>Cybersecurity · ML</p><h3>IoT Intrusion Detection System</h3></a>
+              <a class="related-card" href="securetext.html"><p>Software security</p><h3>SecureText</h3></a>
+            </div>
+          </section>
+        </div>
+
+        <nav class="case-aside" aria-label="Case study sections">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#overview" data-nav-link>Overview</a></li>
+            <li><a href="#problem" data-nav-link>Problem statement</a></li>
+            <li><a href="#objectives" data-nav-link>Objectives</a></li>
+            <li><a href="#technologies" data-nav-link>Technologies used</a></li>
+            <li><a href="#role" data-nav-link>My role</a></li>
+            <li><a href="#implementation" data-nav-link>Implementation</a></li>
+            <li><a href="#challenges" data-nav-link>Challenges</a></li>
+            <li><a href="#learnings" data-nav-link>Key learnings</a></li>
+            <li><a href="#future" data-nav-link>Future improvements</a></li>
+            <li><a href="#skills" data-nav-link>Skills demonstrated</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-top">
+      <a class="brand" href="../index.html#home" aria-label="Back to home"><span class="brand-mark" aria-hidden="true">CA</span><span>Chandhu Allam</span></a>
+      <div class="footer-links">
+        <a href="https://github.com/Chandhu03" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+        <a href="https://www.linkedin.com/in/chandhuallam422?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_ios" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
+        <a href="mailto:chandhunani252@gmail.com">Email</a>
+      </div>
+    </div>
+    <div class="shell footer-bottom"><p>© <span data-current-year>2026</span> Chandhu Allam. Built with clarity and care.</p></div>
+  </footer>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>
