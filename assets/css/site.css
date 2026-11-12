@@ -349,16 +349,14 @@ ul, ol { margin: 0; padding: 0; }
 @media (max-width: 860px) { .split { grid-template-columns: 1fr; } .split__aside { position: static; } }
 
 .entries { list-style: none; }
-.entry { padding: 2rem 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 0.5rem 2rem; }
+.entry { padding: 2rem 0; border-top: 1px solid var(--line); }
 .entry:last-child { border-bottom: 1px solid var(--line); }
-.entry time, .entry .when { font-size: 0.875rem; color: var(--smoke); padding-top: 0.35rem; }
 .entry h3 { font-family: var(--serif); font-size: 1.75rem; font-weight: 500; line-height: 1.15; margin-bottom: 0.2rem; }
 .entry .org { color: var(--ember); font-size: 0.9375rem; margin-bottom: 0.85rem; }
 .entry p, .entry li { color: var(--ash); font-size: 0.9875rem; }
 .entry ul { padding-left: 1.1rem; }
 .entry li { margin-bottom: 0.35rem; }
 .entry li::marker { color: var(--umber); }
-@media (max-width: 560px) { .entry { grid-template-columns: 1fr; } }
 
 .edu { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
 .edu article { padding: 1.75rem; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(2, 4, 3, 0.35); }
