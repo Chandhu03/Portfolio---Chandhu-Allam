@@ -1,18 +1,10 @@
 {
-  "name": "Chandhu Allam | Portfolio",
+  "name": "Chandhu Allam — Security Engineering",
   "short_name": "Chandhu Allam",
-  "description": "Portfolio of Chandhu Allam, a cybersecurity and software engineering graduate student.",
   "start_url": "./",
   "scope": "./",
-  "display": "standalone",
-  "background_color": "#0B1120",
-  "theme_color": "#0B1120",
-  "icons": [
-    {
-      "src": "favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ]
+  "display": "browser",
+  "background_color": "#020403",
+  "theme_color": "#020403",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
 }

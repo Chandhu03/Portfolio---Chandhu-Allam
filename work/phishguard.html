@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PhishGuard — phishing-URL detection, evaluated honestly | Chandhu Allam</title>
+  <meta name="description" content="Case study: a phishing-URL classifier that scored 95.2% in class, a domain-split re-evaluation that showed why that number misleads, and the hardened app and open research site that came out of it.">
+  <meta name="theme-color" content="#020403">
+  <link rel="canonical" href="https://chandhu03.github.io/Portfolio---Chandhu-Allam/work/phishguard.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="PhishGuard — phishing-URL detection, evaluated honestly">
+  <meta property="og:description" content="Four classifiers, a domain-split re-evaluation, a hardened demo and an in-browser URL dissector.">
+  <meta property="og:image" content="https://chandhu03.github.io/Portfolio---Chandhu-Allam/assets/work/phishguard-dissector.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../">Chandhu Allam</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="../#work" aria-current="page">Work</a>
+        <a href="../#experience">Experience</a>
+        <a href="../#skills">Skills</a>
+        <a href="../resume.html">Résumé</a>
+        <a href="../#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="cs-hero" style="--tone: rgba(26, 35, 36, 0.95)">
+      <div class="wrap">
+        <a class="back" href="../#work">Back to selected work</a>
+        <h1>PhishGuard</h1>
+        <p class="dek">A phishing-URL classifier that scored 95.2% in a course project, the re-evaluation that showed why that number misleads, and the hardened app and open research site that came out of it.</p>
+        <dl class="cs-meta">
+          <div><dt>Type</dt><dd>ECE 569A team project (3 members), continued independently</dd></div>
+          <div><dt>Published as</dt><dd><a href="https://securemindlabs.com/" rel="noopener">SecureMind Labs</a> research site</dd></div>
+          <div><dt>Stack</dt><dd>Python, scikit-learn, XGBoost, Streamlit, Vite, GitHub Actions</dd></div>
+          <div><dt>Links</dt><dd><a href="https://github.com/Chandhu03/AI-Based-Phishing-URL-Detection" rel="noopener">Source on GitHub</a><br><a href="https://securemind-ai.streamlit.app/" rel="noopener">Streamlit demo</a></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>Two numbers</h2>
+        <div class="cs-body">
+          <div class="pair">
+            <div><b>95.2%</b><p>Logistic-regression accuracy on a random 80/20 split of a 10,000-URL benchmark. The headline of the course project.</p></div>
+            <div><b>10.6%</b><p>Share of phishing URLs the deployed demo model catches on held-out websites from a public dataset (PhiUSIIL), at its default threshold.</p></div>
+          </div>
+          <p>Both numbers are real, and they measure different things. The first is an in-distribution score: training and test URLs come from the same sources, and often the same websites. The second comes from a later re-evaluation in which no website appears in both training and testing. Most of this case study is about the gap between them, because a security tool that is evaluated the first way will be trusted more than it deserves.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>The course project</h2>
+        <div class="cs-body">
+          <p>The original goal was to detect phishing links from the URL alone, with few false positives. Work was split three ways; <strong>my part was the dataset and feature-extraction stages</strong>, while teammates owned model training and the report visuals.</p>
+          <p>The models were trained on a public benchmark of 10,000 URLs, balanced between phishing and legitimate, described by 48 precomputed lexical and page-structure features such as dot count, subdomain depth, hostname length and the presence of sensitive words. Four classifiers were compared on the same 2,000-URL held-out test set:</p>
+          <div class="table-wrap">
+            <table class="data">
+              <thead><tr><th>Model</th><th class="num">Accuracy</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">ROC-AUC</th></tr></thead>
+              <tbody>
+                <tr><td>Logistic regression</td><td class="num">0.952</td><td class="num">0.945</td><td class="num">0.960</td><td class="num">0.952</td><td class="num">0.987</td></tr>
+                <tr><td>SVM</td><td class="num">0.969</td><td class="num">0.962</td><td class="num">0.977</td><td class="num">0.969</td><td class="num">0.995</td></tr>
+                <tr><td>Random forest</td><td class="num">0.984</td><td class="num">0.984</td><td class="num">0.983</td><td class="num">0.984</td><td class="num">0.999</td></tr>
+                <tr class="hl"><td>XGBoost</td><td class="num">0.986</td><td class="num">0.985</td><td class="num">0.987</td><td class="num">0.986</td><td class="num">0.999</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Logistic regression scored 0.941 ± 0.006 in five-fold cross-validation, consistent with its test score. On this benchmark the problem looks nearly solved. The next stage tested whether that holds when the model meets websites it has not seen.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>Re-evaluating it properly</h2>
+        <div class="cs-body">
+          <p>I rebuilt the evaluation as a reproducible pipeline on two licence-checked public datasets: PhiUSIIL (235,349 URLs after cleaning) and Hannousse and Yahiouche (11,424 URLs, collected in 2020).</p>
+          <ol class="steps">
+            <li><strong>Download and verify</strong>HTTPS only, size-capped, every file pinned by SHA-256. URLs inside the data are treated as text and never requested.</li>
+            <li><strong>Clean</strong>Rejected rows, duplicates and URLs with conflicting labels are counted, not silently dropped.</li>
+            <li><strong>Split by website</strong>70/15/15 by registrable domain using the Public Suffix List, so no site appears in two splits. The list implementation passes its official test vectors.</li>
+            <li><strong>Select on validation only</strong>Model family and decision threshold are chosen on validation data; each test set is scored once. Confidence intervals come from a bootstrap that resamples whole domains.</li>
+            <li><strong>Save safely</strong>Models are saved as JSON plus NumPy arrays loaded with <code>allow_pickle=False</code>, and must reproduce scikit-learn's predictions exactly before they are written.</li>
+          </ol>
+          <h3>What it found</h3>
+          <p><strong>One dataset gave the answer away.</strong> Every legitimate URL in PhiUSIIL is a bare <code>https://www.</code> homepage. A one-line rule with no machine learning scores F1 0.996 there, and 0.754 on the other dataset. Any model trained on full PhiUSIIL URLs can learn that shortcut, so the main candidate reads only the hostname.</p>
+          <p><strong>Strong on familiar data, much weaker on new data.</strong> A character n-gram model on hostnames ranks phishing clearly better than the demo model on held-out PhiUSIIL domains. On a dataset it never saw, the advantage nearly disappears, and the threshold tuned for 1% false positives produces 6.2%.</p>
+          <div class="table-wrap">
+            <table class="data">
+              <caption>ROC-AUC with 95% domain-level bootstrap intervals</caption>
+              <thead><tr><th>Test set</th><th class="num">Hostname candidate</th><th class="num">Current demo model</th></tr></thead>
+              <tbody>
+                <tr><td>PhiUSIIL, held-out domains (35,816 URLs)</td><td class="num">0.919 (0.902–0.935)</td><td class="num">0.848 (0.809–0.885)</td></tr>
+                <tr><td>Hannousse, different dataset (9,625 URLs)</td><td class="num">0.741 (0.711–0.772)</td><td class="num">0.717 (0.682–0.751)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The conclusion written into the model card is that neither model is ready to make a security decision. The candidate stays experimental, and the live site says so next to every number.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>Hardening the app</h2>
+        <div class="cs-body">
+          <p>The Streamlit demo accepts arbitrary text from the internet, so it was treated as an attack surface.</p>
+          <ul>
+            <li><strong>Input validation:</strong> http and https only with no silent scheme assumption; control characters, bidirectional-text characters, whitespace and backslashes rejected; a 2,048-character limit; error messages that never echo the input.</li>
+            <li><strong>Supply chain:</strong> every dependency pinned in a universal lock file with SHA-256 hashes for every published file; installs use <code>--require-hashes</code>, binary wheels only, and no dependency resolution at install time.</li>
+            <li><strong>CI on Linux and Windows:</strong> gitleaks over every commit (with the tool's own checksum verified), workflow linting, a lock-freshness check, pip-audit, Bandit, a full compile and the test suite.</li>
+          </ul>
+<pre class="code"><span class="c"># the checks CI runs, reproducible locally</span>
+python -m compileall -q -f .
+python -m pytest -q
+python -m pip_audit --require-hashes --disable-pip -r requirements-lock.txt
+python -m bandit -q -ll -r app.py securemind
+gitleaks git --no-banner --redact .</pre>
+          <div class="figures">
+            <div><b>182</b><span>app, security, model-parity and lock-file tests</span></div>
+            <div><b>59</b><span>research-pipeline tests</span></div>
+            <div><b>104</b><span>website tests (dissector policy, PSL vectors, Punycode)</span></div>
+          </div>
+          <p class="footnote">All 345 tests passed when re-run locally for this case study in November 2026.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>The research site</h2>
+        <div class="cs-body">
+          <p>The public site, securemindlabs.com, deliberately does not call the model. Its main tool is a URL dissector that runs entirely in the visitor's browser and reports facts about a link: the scheme, the real registrable domain, disguised IP addresses, hidden credentials, look-alike characters and embedded redirects. It never fetches, resolves or scores the URL, and nothing is sent anywhere.</p>
+          <figure class="cs-figure cs-wide">
+            <div class="screen"><img src="../assets/work/phishguard-dissector.webp" width="1440" height="900" loading="lazy" decoding="async" alt="The SecureMind Labs URL dissector showing that in http://paypal.com.secure-account.tk/login the registrable domain is secure-account.tk, with a notable observation that paypal.com is only a subdomain."></div>
+            <figcaption>The dissector on the live site: “paypal.com” is only a subdomain of secure-account.tk.</figcaption>
+          </figure>
+          <p>The decision not to expose the model was recorded with its reasons: the live model is weak on unseen domains, the better candidate is not approved for production, and a public inference API would need rate limiting, a logging policy and its own threat model. The site is a static Vite build on Cloudflare Pages with security headers and no cookies or analytics.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>What I would do next</h2>
+        <div class="cs-body">
+          <ul class="status-board">
+            <li><span class="tag tag--done">Done</span><span>Course pipeline, hardened demo, hash-locked dependencies, CI, domain-split evaluation, model card, live research site</span></li>
+            <li><span class="tag tag--wip">Open</span><span>Publish the evaluation outputs in the public repository so every number on the site can be checked; move research-only XGBoost out of the runtime install (with its CUDA dependency, about 71% of the Linux wheel set)</span></li>
+            <li><span class="tag tag--plan">Planned</span><span>Per-domain weighting, time-based evaluation on newer data, and only then a decision on replacing the demo model</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="next">
+      <div class="wrap">
+        <a href="iot-sentinel.html"><span>Next case study</span><strong>IoT Sentinel</strong></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span data-year>2026</span> Chandhu Allam</p>
+      <nav aria-label="Footer">
+        <a href="../#work">Work</a>
+        <a href="../resume.html">Résumé</a>
+        <a href="https://github.com/Chandhu03" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/chandhuallam422" rel="noopener">LinkedIn</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../assets/js/site.js" defer></script>
+</body>
+</html>

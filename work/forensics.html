@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forensic investigations — memory, disk and network | Chandhu Allam</title>
+  <meta name="description" content="Case study: three digital forensics investigations — WannaCry in a memory image, a blackmail case on a disk image, and an Emotet infection reconstructed from a packet capture.">
+  <meta name="theme-color" content="#020403">
+  <link rel="canonical" href="https://chandhu03.github.io/Portfolio---Chandhu-Allam/work/forensics.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Forensic investigations — memory, disk and network">
+  <meta property="og:description" content="WannaCry, a blackmail case and Emotet: three investigations and the method behind them.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../">Chandhu Allam</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="../#work" aria-current="page">Work</a>
+        <a href="../#experience">Experience</a>
+        <a href="../#skills">Skills</a>
+        <a href="../resume.html">Résumé</a>
+        <a href="../#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="cs-hero" style="--tone: rgba(95, 46, 27, 0.62)">
+      <div class="wrap">
+        <a class="back" href="../#work">Back to selected work</a>
+        <h1>Forensic investigations</h1>
+        <p class="dek">Three investigations from ECE 570 Computer Forensics Methodologies: ransomware in a memory image, a blackmail case on a laptop disk image, and a malware infection reconstructed from network traffic.</p>
+        <dl class="cs-meta">
+          <div><dt>Type</dt><dd>Graduate coursework, University of Victoria, 2026</dd></div>
+          <div><dt>My role</dt><dd>Disk and network investigations individually; memory investigation as part of a team</dd></div>
+          <div><dt>Tools</dt><dd>Volatility 2 and 3, Autopsy, Wireshark, NetworkMiner, FTK Imager records, HxD</dd></div>
+          <div><dt>Environment</dt><dd>Kali Linux in an isolated virtual lab</dd></div>
+        </dl>
+        <div class="notice"><p>The cases are course-provided training scenarios. Reports and evidence files stay private under course rules, so this page describes method and findings rather than reproducing the submissions.</p></div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>The method I follow</h2>
+        <div class="cs-body">
+          <p>The same discipline applied to all three cases: a conclusion is only as strong as the evidence chain under it, and what was observed is kept separate from what was inferred.</p>
+          <ol class="steps">
+            <li><strong>Verify integrity before analysis</strong>Recompute MD5 and SHA-1 hashes of every evidence file and compare them with the acquisition record. Nothing is examined until they match.</li>
+            <li><strong>Profile the system</strong>Establish operating system, users, hosts and time zone, so every later timestamp and artefact is interpreted correctly.</li>
+            <li><strong>Analyse, then corroborate</strong>Each finding is confirmed by a second, independent source: a second tool, a different artefact type, or a hash lookup against threat intelligence.</li>
+            <li><strong>Reconstruct the timeline</strong>Order the corroborated events into a sequence that explains what happened, not a list of disconnected observations.</li>
+            <li><strong>Report with confidence levels</strong>State facts, inferences and gaps separately, with the commands and frames that support each one.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>Case files</h2>
+        <div class="cs-body">
+          <article class="casefile">
+            <header><h3>Network: an Emotet infection</h3><p>Individual, packet capture</p></header>
+            <div class="body">
+              <p>A packet capture from a corporate network, about 50 minutes long. The task: find the infected host, how it was infected, and what it talked to afterwards.</p>
+              <ul>
+                <li><strong>Host attribution.</strong> Identified the victim's IP, hostname, MAC address and vendor, Active Directory domain and logged-in user from NBNS, DHCP, Kerberos and SMB2/NTLMSSP traffic, then confirmed them with NetworkMiner's passive fingerprinting.</li>
+                <li><strong>Infection chain.</strong> Traced an HTTP download of a Word document with an auto-running, obfuscated macro, followed immediately by a second request that delivered a Windows executable. Both files were reconstructed from the TCP streams with Wireshark and, independently, NetworkMiner.</li>
+                <li><strong>Identification without redistribution.</strong> Looked up the files' SHA-256 hashes on VirusTotal instead of uploading the samples. The document was flagged by 50 of 63 engines and the executable by 64 of 72, both as Emotet.</li>
+                <li><strong>Command and control.</strong> Documented repeated HTTP POST beaconing to two external servers with randomised paths, including a callback that returned the victim's public IP, a known Emotet behaviour. Delivered hash-based indicators and remediation recommendations.</li>
+              </ul>
+              <figure class="diagram" style="margin-top:1.25rem">
+                <svg viewBox="0 0 900 120" role="img" aria-labelledby="em-t">
+                  <title id="em-t">Emotet infection chain: phishing document, executable download, execution, then HTTP POST command-and-control to two servers.</title>
+                  <g font-size="12.5" fill="#e8dfd0">
+                    <rect x="5" y="30" width="190" height="56" rx="4" fill="#141413" stroke="rgba(232,223,208,.25)"/><text x="100" y="54" text-anchor="middle">Word document</text><text x="100" y="72" text-anchor="middle" fill="#a8a196" font-size="11">macro, HTTP download</text>
+                    <rect x="240" y="30" width="190" height="56" rx="4" fill="#141413" stroke="rgba(232,223,208,.25)"/><text x="335" y="54" text-anchor="middle">Second request</text><text x="335" y="72" text-anchor="middle" fill="#a8a196" font-size="11">Windows PE delivered</text>
+                    <rect x="475" y="30" width="190" height="56" rx="4" fill="#141413" stroke="rgba(232,223,208,.25)"/><text x="570" y="54" text-anchor="middle">Execution</text><text x="570" y="72" text-anchor="middle" fill="#a8a196" font-size="11">hashes confirm Emotet</text>
+                    <rect x="710" y="30" width="185" height="56" rx="4" fill="#5f2e1b" stroke="#c98c62"/><text x="802" y="54" text-anchor="middle">C2 beaconing</text><text x="802" y="72" text-anchor="middle" fill="#e6cdb8" font-size="11">HTTP POST, 2 servers</text>
+                  </g>
+                  <g stroke="#c98c62" stroke-width="1.4"><path d="M195 58H238"/><path d="M430 58H473"/><path d="M665 58H708"/></g>
+                </svg>
+              </figure>
+            </div>
+          </article>
+
+          <article class="casefile">
+            <header><h3>Disk and memory: a blackmail investigation</h3><p>Individual, SSD image and memory dump</p></header>
+            <div class="body">
+              <p>A suspect's laptop, imaged with FTK Imager, plus a memory capture. The task: establish who the suspect was communicating with, and whether there was evidence of blackmail and planned travel.</p>
+              <ul>
+                <li><strong>Integrity first.</strong> Recomputed MD5 and SHA-1 for the disk image and the memory dump and matched them to the acquisition log; added SHA-256 for extra assurance.</li>
+                <li><strong>Mail and cloud artefacts.</strong> Parsed 495 emails with Autopsy, recovered deleted messages that contradicted the suspect's statement, and found an IMAP mail configuration and OneDrive sync confirmed by the OneDrive process in the memory dump (Volatility 3).</li>
+                <li><strong>Hidden and encrypted files.</strong> Identified an attachment as an encrypted container by its file header rather than its extension, and found a 7-Zip archive disguised as a JPEG through its file signature in a hex editor.</li>
+                <li><strong>Encoded evidence.</strong> Booking confirmations were Base64-encoded inside HTML mail bodies and unreadable in Autopsy; extracting the raw mailbox and decoding it recovered the travel details.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="casefile">
+            <header><h3>Memory: WannaCry ransomware</h3><p>Team, Windows 7 memory image</p></header>
+            <div class="body">
+              <p>A memory image from an infected Windows 7 machine, analysed with Volatility 2.6 on Kali Linux.</p>
+              <ul>
+                <li><strong>Process chain.</strong> <code>pslist</code> and <code>pstree</code> showed a randomly named executable launched by Explorer from the user's desktop, which spawned the WannaCry decryptor and its bundled Tor client.</li>
+                <li><strong>Injected code.</strong> <code>dlllist</code>, <code>ldrmodules</code> and <code>malfind</code> surfaced memory regions marked PAGE_EXECUTE_READWRITE, a common sign of code injection.</li>
+                <li><strong>Confirmation.</strong> Extracted the executable with <code>procdump</code>; VirusTotal flagged it as WannaCry (61 of 71 engines). Handle analysis found the ransomware's <code>.eky</code> and <code>.WNCRYT</code> working files.</li>
+                <li><strong>Network and persistence.</strong> <code>netscan</code> found connections to an address that AlienVault OTX identifies as a Tor node; <code>hivelist</code> located the user registry hive for persistence analysis.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>What carries over</h2>
+        <div class="cs-body">
+          <p>The same habits appear in my engineering work. Verifying evidence before analysing it has a counterpart in SecureMind's strict validation before ingestion. Corroborating every finding with a second source is what its citation gate asks of AI reports. Looking up hashes instead of uploading samples is the same caution that keeps PhishGuard's dissector from ever fetching a URL.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="next">
+      <div class="wrap">
+        <a href="securetext.html"><span>Next case study</span><strong>SecureText</strong></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span data-year>2026</span> Chandhu Allam</p>
+      <nav aria-label="Footer">
+        <a href="../#work">Work</a>
+        <a href="../resume.html">Résumé</a>
+        <a href="https://github.com/Chandhu03" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/chandhuallam422" rel="noopener">LinkedIn</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../assets/js/site.js" defer></script>
+</body>
+</html>

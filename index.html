@@ -3,251 +3,306 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Chandhu Allam is a graduate student building security-minded software, AI/ML workflows, and dependable connected systems.">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0B1120">
-  <meta name="color-scheme" content="dark">
-  <title>Chandhu Allam | Cybersecurity, AI & Software Engineering</title>
-  <!-- Replace the relative canonical with the public domain when the site is deployed. -->
-  <link rel="canonical" href="./">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <title>Chandhu Allam — Security Engineering</title>
+  <meta name="description" content="Chandhu Allam builds security tools for detection and investigation: an AI-assisted SOC platform, phishing-URL research, IoT anomaly detection and digital forensics. MEng, University of Victoria.">
+  <meta name="theme-color" content="#020403">
+  <link rel="canonical" href="https://chandhu03.github.io/Portfolio---Chandhu-Allam/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Chandhu Allam | Cybersecurity, AI & Software Engineering">
-  <meta property="og:description" content="Security-minded software, AI/ML workflows, and dependable connected systems.">
-  <meta property="og:url" content="./">
-  <meta property="og:image" content="portrait.jpg">
-  <meta property="og:image:alt" content="Portrait of Chandhu Allam">
+  <meta property="og:title" content="Chandhu Allam — Security Engineering">
+  <meta property="og:description" content="Security tools for detection and investigation, built so every finding can be traced to its evidence.">
+  <meta property="og:url" content="https://chandhu03.github.io/Portfolio---Chandhu-Allam/">
+  <meta property="og:image" content="https://chandhu03.github.io/Portfolio---Chandhu-Allam/assets/img/og.jpg">
+  <meta property="og:image:alt" content="Chandhu Allam, security engineering portfolio">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Chandhu Allam | Cybersecurity, AI & Software Engineering">
-  <meta name="twitter:description" content="Security-minded software, AI/ML workflows, and dependable connected systems.">
-  <meta name="twitter:image" content="portrait.jpg">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="preload" as="image" href="assets/img/portrait-900.webp" imagesrcset="assets/img/portrait-560.webp 560w, assets/img/portrait-900.webp 900w" imagesizes="(max-width: 900px) 52vw, 31vw" type="image/webp">
+  <link rel="stylesheet" href="assets/css/site.css">
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Chandhu Allam",
-      "email": "mailto:chandhunani252@gmail.com",
-      "jobTitle": "Cybersecurity and Software Engineering Graduate Student",
-      "sameAs": [
-        "https://github.com/Chandhu03",
-        "https://www.linkedin.com/in/chandhuallam422"
-      ],
-      "knowsAbout": ["Cybersecurity", "Artificial Intelligence", "Machine Learning", "Networking", "Digital Forensics", "Secure Communications"]
-    }
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Chandhu Allam",
+    "url": "https://chandhu03.github.io/Portfolio---Chandhu-Allam/",
+    "jobTitle": "MEng student, Telecommunications and Information Security",
+    "alumniOf": [
+      {"@type": "CollegeOrUniversity", "name": "University of Victoria"},
+      {"@type": "CollegeOrUniversity", "name": "Vaagdevi College of Engineering"}
+    ],
+    "knowsAbout": ["Security operations", "Detection engineering", "Digital forensics", "Machine learning for security", "Applied cryptography"],
+    "sameAs": ["https://github.com/Chandhu03", "https://www.linkedin.com/in/chandhuallam422"]
+  }
   </script>
 </head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<body class="home-page">
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-
-  <header class="site-header" id="site-header">
-    <div class="shell nav-shell">
-      <a class="brand" href="#home" aria-label="Chandhu Allam — home">
-        <span class="brand-mark" aria-hidden="true">CA</span>
-        <span>Chandhu Allam</span>
-      </a>
-
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
-        <span class="sr-only">Toggle navigation</span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </button>
-
-      <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
-        <a class="is-active" href="#home" data-nav-link>Home</a>
-        <a href="#about" data-nav-link>About</a>
-        <a href="projects.html">Projects</a>
-        <a href="#skills" data-nav-link>Skills</a>
-        <a href="#experience" data-nav-link>Experience</a>
-        <a href="#contact" data-nav-link>Contact</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="./">Chandhu Allam</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="resume.html">Résumé</a>
+        <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main id="main-content">
-    <section class="hero" id="home" aria-labelledby="hero-title">
-      <div class="hero-grid shell">
-        <div class="hero-copy reveal">
-          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Graduate student · Security-minded builder</p>
-          <h1 id="hero-title">Secure systems. Useful intelligence. Thoughtful engineering.</h1>
-          <p class="hero-lede">I’m Chandhu Allam, a cybersecurity-focused graduate student building practical software, machine learning workflows, and connected systems with security in mind from the start.</p>
-          <div class="button-row" aria-label="Portfolio actions">
-            <a class="button button-primary" href="resume.html">View resume <span aria-hidden="true">↗</span></a>
-            <a class="button button-secondary" href="projects.html">Explore projects <span aria-hidden="true">→</span></a>
-          </div>
-          <div class="text-links" aria-label="Professional profiles">
-            <a href="https://github.com/Chandhu03" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
-            <a href="https://www.linkedin.com/in/chandhuallam422?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_ios" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__light" aria-hidden="true"></div>
+      <figure class="hero__plate">
+        <picture>
+          <source type="image/webp" srcset="assets/img/portrait-560.webp 560w, assets/img/portrait-900.webp 900w" sizes="(max-width: 900px) 52vw, 31vw">
+          <img src="assets/img/portrait-900.jpg" srcset="assets/img/portrait-560.jpg 560w, assets/img/portrait-900.jpg 900w" sizes="(max-width: 900px) 52vw, 31vw" width="900" height="1290" alt="Portrait of Chandhu Allam" fetchpriority="high" decoding="async">
+        </picture>
+      </figure>
+
+      <div class="wrap">
+        <div class="hero__copy">
+          <p class="hero__name">Chandhu Allam</p>
+          <h1 id="hero-title"><span class="line">Secure systems,</span> <span class="line">built on evidence.</span></h1>
+          <p class="hero__lede">I build security tools for detection and investigation, and hold them to the standard of a forensic report: <strong>every finding traceable to the evidence behind it.</strong></p>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="#work">See selected work</a>
+            <a class="btn" href="resume.html">Read résumé</a>
           </div>
         </div>
 
-        <div class="hero-portrait-wrap reveal" data-delay="120">
-          <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
-          <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
-          <figure class="hero-portrait">
-            <img src="portrait.jpg" width="900" height="1142" alt="Chandhu Allam in a navy suit" fetchpriority="high" decoding="async">
-          </figure>
-          <div class="hero-note" aria-label="Career focus">
-            <span class="note-icon" aria-hidden="true">✦</span>
-            <span><strong>Open to opportunities</strong><small>Software engineering · Cybersecurity · Machine learning</small></span>
-          </div>
-        </div>
-      </div>
-      <a class="scroll-cue" href="#about" aria-label="Scroll to about section"><span aria-hidden="true"></span> Scroll to explore</a>
-    </section>
-
-    <section class="section section-about" id="about" aria-labelledby="about-title">
-      <div class="shell about-layout">
-        <div class="section-intro reveal">
-          <p class="eyebrow">A considered approach</p>
-          <h2 id="about-title">Engineering with a security mindset, not a security afterthought.</h2>
-        </div>
-        <div class="about-copy reveal" data-delay="100">
-          <p>I’m pursuing graduate studies in Telecommunications and Information Security at the University of Victoria. I enjoy translating complex problems into systems that are clear, resilient, and genuinely useful.</p>
-          <p>My work sits where cybersecurity, machine learning, networking, and digital forensics meet. Whether I’m examining a threat signal, prototyping an IoT safeguard, or shaping a responsive interface, I bring curiosity, structure, and care to the details.</p>
-          <a class="inline-link" href="resume.html">More about my background <span aria-hidden="true">→</span></a>
-        </div>
+        <dl class="hero__facts">
+          <div><dt>Focus</dt><dd>Security operations, detection engineering, machine learning for security</dd></div>
+          <div><dt>Studying</dt><dd>MEng, Telecommunications and Information Security, University of Victoria</dd></div>
+          <div><dt>Available</dt><dd>Co-op, January to April 2027, in Canada</dd></div>
+        </dl>
       </div>
     </section>
 
-    <section class="section section-featured" aria-labelledby="featured-title">
-      <div class="shell">
-        <div class="section-heading reveal">
-          <div>
-            <p class="eyebrow">Selected work</p>
-            <h2 id="featured-title">Projects that connect theory to real-world constraints.</h2>
-          </div>
-          <a class="inline-link hide-on-mobile" href="projects.html">See all projects <span aria-hidden="true">→</span></a>
-        </div>
-
-        <div class="featured-grid">
-          <article class="featured-card reveal" data-delay="0">
-            <a class="project-art project-card-media art-capstone" href="projects/ece-567-capstone.html" aria-label="Read the ECE 567 Capstone Project case study">
-              <span class="project-visual-glyph" aria-hidden="true">◆</span>
-              <span class="project-visual-detail" aria-hidden="true"></span>
-              <span class="project-visual-detail is-alt" aria-hidden="true"></span>
-              <span class="project-art-label">Applied intelligence</span>
-            </a>
-            <div class="card-content">
-              <p class="card-kicker">AI &amp; security</p>
-              <h3><a href="projects/ece-567-capstone.html">ECE 567 Capstone Project</a></h3>
-              <p>Applying machine learning to cybersecurity through intelligent threat detection and secure system design.</p>
-              <div class="chip-list" aria-label="Project focus"><span>Machine learning</span><span>Threat detection</span><span>Cybersecurity</span></div>
-            </div>
-          </article>
-
-          <article class="featured-card reveal" data-delay="90">
-            <a class="project-art project-card-media art-forensics" href="projects/ece-570-digital-forensics.html" aria-label="Read the ECE 570 Digital Forensics case study">
-              <span class="project-visual-glyph" aria-hidden="true">⌕</span>
-              <span class="project-visual-detail" aria-hidden="true"></span>
-              <span class="project-visual-detail is-alt" aria-hidden="true"></span>
-              <span class="project-art-label">Evidence &amp; analysis</span>
-            </a>
-            <div class="card-content">
-              <p class="card-kicker">Digital forensics</p>
-              <h3><a href="projects/ece-570-digital-forensics.html">ECE 570 Digital Forensics</a></h3>
-              <p>Investigations spanning malware analysis, memory forensics, incident response, and evidence collection.</p>
-              <div class="chip-list" aria-label="Project focus"><span>Digital forensics</span><span>Malware analysis</span><span>Incident response</span></div>
-            </div>
-          </article>
-
-          <article class="featured-card reveal" data-delay="180">
-            <a class="project-art project-card-media art-iot" href="projects/iot-intrusion-detection.html" aria-label="Read the IoT Intrusion Detection System case study">
-              <span class="project-visual-glyph" aria-hidden="true">⌁</span>
-              <span class="project-visual-detail" aria-hidden="true"></span>
-              <span class="project-visual-detail is-alt" aria-hidden="true"></span>
-              <span class="project-art-label">Network defence</span>
-            </a>
-            <div class="card-content">
-              <p class="card-kicker">ML &amp; networks</p>
-              <h3><a href="projects/iot-intrusion-detection.html">IoT Intrusion Detection System</a></h3>
-              <p>A machine learning intrusion detection system built on IoT network traffic to surface malicious behaviour.</p>
-              <div class="chip-list" aria-label="Project focus"><span>Cybersecurity</span><span>Machine learning</span><span>Network traffic</span></div>
-            </div>
-          </article>
-        </div>
-        <a class="inline-link show-on-mobile" href="projects.html">See all projects <span aria-hidden="true">→</span></a>
-      </div>
-    </section>
-
-    <section class="section section-skills" id="skills" aria-labelledby="skills-title">
-      <div class="shell">
-        <div class="section-heading section-heading-stack reveal">
-          <div>
-            <p class="eyebrow">Technical range</p>
-            <h2 id="skills-title">A toolkit shaped for systems work.</h2>
-          </div>
-          <p>Built around foundations in engineering, applied security, and data-driven problem solving—not a collection of progress bars.</p>
-        </div>
-
-        <div class="skills-grid">
-          <article class="skill-card reveal"><span class="skill-icon" aria-hidden="true">⌘</span><h3>Programming</h3><p>Python · JavaScript · Java · C · SQL</p></article>
-          <article class="skill-card reveal" data-delay="50"><span class="skill-icon" aria-hidden="true">⌁</span><h3>Cybersecurity</h3><p>Threat analysis · Vulnerability assessment · Digital forensics · Secure communications</p></article>
-          <article class="skill-card reveal" data-delay="100"><span class="skill-icon" aria-hidden="true">◌</span><h3>Machine Learning</h3><p>Classification · Feature engineering · Model evaluation · Applied AI</p></article>
-          <article class="skill-card reveal" data-delay="150"><span class="skill-icon" aria-hidden="true">⌇</span><h3>Networking</h3><p>TCP/IP · Wireless systems · Network analysis · Telecommunications</p></article>
-          <article class="skill-card reveal" data-delay="200"><span class="skill-icon" aria-hidden="true">△</span><h3>Cloud</h3><p>Cloud fundamentals · Secure deployment concepts · Connected services</p></article>
-          <article class="skill-card reveal" data-delay="250"><span class="skill-icon" aria-hidden="true">↗</span><h3>Developer tools</h3><p>Git · Linux · VS Code · Web APIs · Responsive interfaces</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-experience" id="experience" aria-labelledby="experience-title">
-      <div class="shell experience-layout">
-        <div class="section-intro reveal">
-          <p class="eyebrow">Path so far</p>
-          <h2 id="experience-title">Experience</h2>
-          <p class="section-summary">Graduate research, teaching, and the engineering foundation underneath both.</p>
-        </div>
-
-        <ol class="timeline" aria-label="Experience timeline">
-          <li class="timeline-item reveal">
-            <div class="timeline-date">2026 — Present</div>
-            <div class="timeline-content"><p class="timeline-label">Teaching assistant</p><h3>University of Victoria</h3><p>Supporting course delivery for engineering students — running lab sessions, answering technical questions, and assessing coursework against consistent criteria.</p><div class="chip-list"><span>Technical mentoring</span><span>Lab instruction</span><span>Assessment</span></div></div>
-          </li>
-          <li class="timeline-item reveal" data-delay="80">
-            <div class="timeline-date">2026 — 2027</div>
-            <div class="timeline-content"><p class="timeline-label">Graduate student</p><h3>University of Victoria</h3><p>Master’s studies in Telecommunications and Information Security, covering secure communications, networking, digital forensics, and applied machine learning.</p><div class="chip-list"><span>Secure communications</span><span>Networking</span><span>Applied research</span></div></div>
-          </li>
-          <li class="timeline-item reveal" data-delay="160">
-            <div class="timeline-date">2021 — 2025</div>
-            <div class="timeline-content"><p class="timeline-label">Bachelor of Technology</p><h3>Vaagdevi College of Engineering</h3><p>B.Tech in Electronics &amp; Communication Engineering, grounding my work in connected systems, signals, and practical problem solving.</p><div class="chip-list"><span>Electronics</span><span>Communications</span><span>Systems</span></div></div>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="section section-contact" id="contact" aria-labelledby="contact-title">
-      <div class="shell contact-panel reveal">
+    <section class="section section--graphite" aria-labelledby="approach-title">
+      <div class="wrap statement">
         <div>
-          <p class="eyebrow">Start a conversation</p>
-          <h2 id="contact-title">Let’s build something that holds up under pressure.</h2>
-          <p>If you’re working on security-minded engineering, machine learning, or connected systems, I’d be glad to connect.</p>
+          <h2 id="approach-title" class="sr-only">How I work</h2>
+          <blockquote>A detection is only useful if someone can check why it fired.</blockquote>
         </div>
-        <div class="contact-actions">
-          <a class="button button-primary" href="mailto:chandhunani252@gmail.com">Email Chandhu <span aria-hidden="true">↗</span></a>
-          <a class="contact-phone" href="tel:+16729742322">+1 672 974 2322</a>
+        <div class="statement__body">
+          <p>My work sits between security operations and software engineering. I am most interested in the moment an analyst has to decide whether an alert is real, and in building tools that make that decision faster without hiding how it was reached.</p>
+          <p>That idea runs through the projects below. In SecureMind, an AI-written investigation report is rejected unless every claim cites the events it came from. In PhishGuard, the most useful result was the one that contradicted our headline accuracy. In forensics work, I verify evidence hashes before I open anything.</p>
+          <p>I also teach it. As a teaching assistant for SENG 360 Security Engineering at the University of Victoria, I support labs on threat modelling, risk registers and security controls.</p>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="work-title">Selected work</h2>
+          <p>Five projects. Each case study says what was built, what I owned, and what is still unfinished.</p>
+        </div>
+
+        <article class="flagship" aria-labelledby="sm-title">
+          <div class="flagship__copy">
+            <h3 id="sm-title">SecureMind</h3>
+            <p class="sub">AI-assisted security operations platform</p>
+            <p>A working platform for triaging security events. It validates and normalizes incoming events, correlates them into incidents with deterministic rules, and generates investigation reports that are discarded unless every statement cites the evidence behind it.</p>
+            <ul class="flagship__list">
+              <li><span>Status</span> Local MVP (v0.1), synthetic data</li>
+              <li><span>Stack</span> TypeScript, Fastify, React, SQLite</li>
+              <li><span>Verified</span> 175 automated tests passing</li>
+              <li><span>Security</span> RBAC, CSRF and CSP controls, rate limits, append-only audit log</li>
+            </ul>
+            <a class="btn btn--solid" href="work/securemind.html">Read the SecureMind case study</a>
+          </div>
+          <div class="flagship__visual">
+            <figure class="screen">
+              <img src="assets/work/securemind-dashboard.webp" width="1440" height="900" loading="lazy" decoding="async" alt="SecureMind dashboard showing six open incidents, 730 stored events, daily activity charts and a high-priority queue, labelled as synthetic demo data.">
+            </figure>
+            <figure class="screen screen--offset" aria-hidden="true">
+              <img src="assets/work/securemind-investigation.webp" width="1440" height="900" loading="lazy" decoding="async" alt="">
+            </figure>
+          </div>
+        </article>
+
+        <ul class="work-index">
+          <li class="work-row">
+            <a href="work/phishguard.html">
+              <h3>PhishGuard <small>Phishing-URL detection, evaluated honestly</small></h3>
+              <p>A team machine-learning project I carried forward into an open research site: four classifiers, a hardened demo app, a re-evaluation split by domain, and a URL dissector that runs in the browser.</p>
+              <span class="status">Live research site</span>
+            </a>
+          </li>
+          <li class="work-row">
+            <a href="work/iot-sentinel.html">
+              <h3>IoT Sentinel <small>Anomaly detection for IoT networks</small></h3>
+              <p>MEng capstone on the CIC IoT-DIAD 2024 dataset. I own the reproducible data pipeline: stratified sampling, analysis, cleaning, and feature selection from 132 features to 79.</p>
+              <span class="status">Team capstone, in progress</span>
+            </a>
+          </li>
+          <li class="work-row">
+            <a href="work/forensics.html">
+              <h3>Forensic investigations <small>Memory, disk and network evidence</small></h3>
+              <p>WannaCry ransomware in a Windows 7 memory image, a blackmail case on a laptop disk image, and an Emotet infection reconstructed from a packet capture.</p>
+              <span class="status">Graduate coursework</span>
+            </a>
+          </li>
+          <li class="work-row">
+            <a href="work/securetext.html">
+              <h3>SecureText <small>From broken messenger to end-to-end encryption</small></h3>
+              <p>Exploited the flaws in a deliberately insecure messenger, then fixed them: PBKDF2 password storage, TOTP and OAuth sign-in, role-based access, and ECDH with AES-256-GCM.</p>
+              <span class="status">Graduate coursework</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--graphite" id="experience" aria-labelledby="exp-title">
+      <div class="wrap split">
+        <div class="split__aside">
+          <h2 id="exp-title">Teaching and experience</h2>
+          <p>Teaching security labs means explaining a threat model to someone seeing one for the first time, then fixing their virtual machine when it breaks mid-session. Both habits carry into my engineering work.</p>
+        </div>
+        <div>
+          <ol class="entries">
+            <li class="entry">
+              <span class="when">Sep 2026 – present</span>
+              <div>
+                <h3>Teaching Assistant, SENG 360 Security Engineering</h3>
+                <p class="org">University of Victoria</p>
+                <ul>
+                  <li>Support labs on threat modelling with data-flow diagrams and STRIDE, risk identification, risk registers and security controls.</li>
+                  <li>Prepare lab materials and virtual-machine environments, and troubleshoot lab problems during sessions.</li>
+                </ul>
+              </div>
+            </li>
+            <li class="entry">
+              <span class="when">Jan 2026 – present</span>
+              <div>
+                <h3>Laboratory Teaching Assistant, ECE 300, ECE 216 and ECE 250</h3>
+                <p class="org">University of Victoria</p>
+                <ul>
+                  <li>Lead circuits and electromagnetics labs: circuit construction, measurement with oscilloscopes and multimeters, and live fault-finding with students.</li>
+                  <li>Grade lab reports against consistent criteria and keep grading records; recognized by the ECE 300 lead instructor for grading accuracy and student engagement.</li>
+                </ul>
+              </div>
+            </li>
+            <li class="entry">
+              <span class="when">May – Jun 2022</span>
+              <div>
+                <h3>Cybersecurity Intern</h3>
+                <p class="org">Verzeo, remote</p>
+                <ul>
+                  <li>Ran phishing-simulation and vulnerability-assessment exercises and documented the findings in structured assessment reports.</li>
+                </ul>
+              </div>
+            </li>
+          </ol>
+
+          <div class="edu" aria-label="Education">
+            <article>
+              <span class="when">Jan 2026 – present</span>
+              <h3>Master of Engineering, Telecommunications and Information Security</h3>
+              <p>University of Victoria, Graduate Co-op Program. GPA 8.63 / 9.0. Coursework in computer forensics, advanced network security, security engineering, and information security and privacy.</p>
+            </article>
+            <article>
+              <span class="when">Nov 2021 – Apr 2025</span>
+              <h3>Bachelor of Technology, Electronics and Communication Engineering</h3>
+              <p>Vaagdevi College of Engineering, Warangal, India. Foundations in signals, communication systems and embedded electronics.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--teal" id="skills" aria-labelledby="skills-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="skills-title">Skills, with the evidence</h2>
+          <p class="skills-key"><strong>Built with</strong> means I used it in a project on this site. <strong>Studied</strong> means coursework or lab work. <strong>Familiar</strong> means working knowledge I have not yet used in depth.</p>
+        </div>
+        <div class="skills">
+          <section class="skill" aria-labelledby="sk-ops">
+            <h3 id="sk-ops">Security operations</h3>
+            <dl>
+              <dt>Built with</dt><dd>Event normalization and correlation rules, incident triage workflows (<a href="work/securemind.html">SecureMind</a>); IOC extraction from forensic evidence (<a href="work/forensics.html">investigations</a>)</dd>
+              <dt>Studied</dt><dd class="studied">Snort IDS/IPS rules, iptables firewall policy, authorized reconnaissance and vulnerability assessment in an isolated lab</dd>
+              <dt>Familiar</dt><dd class="familiar">Nmap, Kali Linux tooling</dd>
+            </dl>
+          </section>
+          <section class="skill" aria-labelledby="sk-for">
+            <h3 id="sk-for">Digital forensics</h3>
+            <dl>
+              <dt>Built with</dt><dd>Volatility, Autopsy, Wireshark, NetworkMiner, MD5/SHA hash verification, timeline reconstruction (<a href="work/forensics.html">investigations</a>)</dd>
+              <dt>Studied</dt><dd class="studied">Acquisition records and chain of custody, file-signature analysis, email and browser artefacts</dd>
+              <dt>Familiar</dt><dd class="familiar">exiftool, binwalk, HxD, VirusTotal and AlienVault OTX lookups</dd>
+            </dl>
+          </section>
+          <section class="skill" aria-labelledby="sk-app">
+            <h3 id="sk-app">Application security and cryptography</h3>
+            <dl>
+              <dt>Built with</dt><dd>PBKDF2, HMAC-SHA256, TOTP, OAuth 2.0, RBAC, ECDH P-256, HKDF, AES-256-GCM (<a href="work/securetext.html">SecureText</a>); scrypt sessions, CSRF and CSP controls, rate limiting (<a href="work/securemind.html">SecureMind</a>)</dd>
+              <dt>Studied</dt><dd class="studied">STRIDE threat modelling, risk registers, security controls (taught in SENG 360 labs)</dd>
+              <dt>Familiar</dt><dd class="familiar">Microsoft SC-900 material (preparing for the exam)</dd>
+            </dl>
+          </section>
+          <section class="skill" aria-labelledby="sk-ml">
+            <h3 id="sk-ml">Machine learning for security</h3>
+            <dl>
+              <dt>Built with</dt><dd>scikit-learn, pandas, NumPy, XGBoost; domain-split evaluation and bootstrap confidence intervals (<a href="work/phishguard.html">PhishGuard</a>); feature selection on 181,336 packets (<a href="work/iot-sentinel.html">IoT Sentinel</a>)</dd>
+              <dt>Studied</dt><dd class="studied">Autoencoders, Isolation Forest and K-Means for unsupervised detection</dd>
+              <dt>Familiar</dt><dd class="familiar">Large-language-model integration with structured, schema-validated output</dd>
+            </dl>
+          </section>
+          <section class="skill" aria-labelledby="sk-eng">
+            <h3 id="sk-eng">Software engineering</h3>
+            <dl>
+              <dt>Built with</dt><dd>Python, TypeScript, React, Fastify, SQLite, Streamlit, Git, GitHub Actions, dependency auditing with pip-audit, Bandit and gitleaks</dd>
+              <dt>Studied</dt><dd class="studied">C and C++, SQL</dd>
+              <dt>Familiar</dt><dd class="familiar">PowerShell, MATLAB</dd>
+            </dl>
+          </section>
+          <section class="skill" aria-labelledby="sk-net">
+            <h3 id="sk-net">Networks</h3>
+            <dl>
+              <dt>Built with</dt><dd>TCP/IP, DNS, DHCP, SMB and Kerberos analysis in packet captures (<a href="work/forensics.html">network investigation</a>)</dd>
+              <dt>Studied</dt><dd class="studied">Wireless and mobile networks, IEEE 802.11, ns-3 simulation</dd>
+              <dt>Familiar</dt><dd class="familiar">Cloud fundamentals (AWS Academy Cloud Foundations)</dd>
+            </dl>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <h2 id="contact-title">Let’s talk about security work.</h2>
+        <p>I’m looking for a cybersecurity co-op from January to April 2027, and I’m interested in SOC analyst, security engineering and detection roles in Canada. Email is the fastest way to reach me.</p>
+        <p><a class="contact-mail" href="mailto:chandhunani252@gmail.com">chandhunani252@gmail.com</a></p>
+        <ul class="contact-links">
+          <li><a class="btn" href="https://github.com/Chandhu03" rel="noopener">GitHub</a></li>
+          <li><a class="btn" href="https://www.linkedin.com/in/chandhuallam422" rel="noopener">LinkedIn</a></li>
+          <li><a class="btn" href="resume.html">Résumé</a></li>
+        </ul>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="shell footer-top">
-      <a class="brand" href="#home" aria-label="Back to home"><span class="brand-mark" aria-hidden="true">CA</span><span>Chandhu Allam</span></a>
-      <div class="footer-links">
-        <a href="https://github.com/Chandhu03" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
-        <a href="https://www.linkedin.com/in/chandhuallam422?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_ios" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
-        <a href="mailto:chandhunani252@gmail.com">Email</a>
-      </div>
+    <div class="wrap">
+      <p>© <span data-year>2026</span> Chandhu Allam</p>
+      <nav aria-label="Footer">
+        <a href="#work">Work</a>
+        <a href="resume.html">Résumé</a>
+        <a href="https://github.com/Chandhu03" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/chandhuallam422" rel="noopener">LinkedIn</a>
+      </nav>
     </div>
-    <div class="shell footer-bottom"><p>© <span data-current-year>2026</span> Chandhu Allam. Built with clarity and care.</p></div>
   </footer>
 
-  <script src="script.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
 </body>
 </html>

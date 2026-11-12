@@ -1,5 +1,4 @@
-# Replace the placeholder host below with the production origin before deployment.
 User-agent: *
 Allow: /
 
-Sitemap: https://YOUR-DOMAIN.example/sitemap.xml
+Sitemap: https://chandhu03.github.io/Portfolio---Chandhu-Allam/sitemap.xml

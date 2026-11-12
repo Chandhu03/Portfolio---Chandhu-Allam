@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SecureText — from broken messenger to end-to-end encryption | Chandhu Allam</title>
+  <meta name="description" content="Case study: attacking and then fixing a deliberately insecure messenger, from password storage and MAC forgery to TOTP, OAuth, Zero Trust controls and ECDH with AES-256-GCM.">
+  <meta name="theme-color" content="#020403">
+  <link rel="canonical" href="https://chandhu03.github.io/Portfolio---Chandhu-Allam/work/securetext.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SecureText — from broken messenger to end-to-end encryption">
+  <meta property="og:description" content="Attack, fix, verify: nine security tasks on one messaging application.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../">Chandhu Allam</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="../#work" aria-current="page">Work</a>
+        <a href="../#experience">Experience</a>
+        <a href="../#skills">Skills</a>
+        <a href="../resume.html">Résumé</a>
+        <a href="../#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="cs-hero" style="--tone: rgba(60, 52, 40, 0.6)">
+      <div class="wrap">
+        <a class="back" href="../#work">Back to selected work</a>
+        <h1>SecureText</h1>
+        <p class="dek">A console messenger handed out deliberately broken. Over three assignments I attacked each weakness, fixed it, and verified the fix, ending with end-to-end encryption where the server only ever sees ciphertext.</p>
+        <dl class="cs-meta">
+          <div><dt>Type</dt><dd>ECE 572 graduate assignment series, individual</dd></div>
+          <div><dt>Language</dt><dd>Python, <code>cryptography</code> library</dd></div>
+          <div><dt>Focus</dt><dd>Password storage, message integrity, authentication, Zero Trust, E2EE</dd></div>
+          <div><dt>Source</dt><dd>Private under course rules</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>Attack, then fix</h2>
+        <div class="cs-body">
+          <p>Each task followed the same loop: reproduce the weakness with a working proof of concept, implement a fix with a reviewed library rather than a hand-rolled primitive, then show that the original attack no longer works.</p>
+          <div class="table-wrap">
+            <table class="data">
+              <thead><tr><th>Weakness</th><th>Proof of concept</th><th>Fix implemented</th></tr></thead>
+              <tbody>
+                <tr><td>Passwords stored in plaintext</td><td>Dictionary attack script</td><td>Salted PBKDF2-SHA256, with a migration script for existing accounts</td></tr>
+                <tr><td>Message authentication built as <code>SHA-256(key ‖ message)</code></td><td>SHA-256 length-extension forgery</td><td>HMAC-SHA256</td></tr>
+                <tr><td>Traffic readable on the network</td><td>Wireshark capture of plaintext messages</td><td>End-to-end encryption (assignment 3)</td></tr>
+                <tr><td>Password-only login</td><td>Not applicable: design requirement</td><td>TOTP multi-factor authentication and GitHub OAuth 2.0 sign-in</td></tr>
+                <tr><td>Implicit trust after login</td><td>Not applicable: design requirement</td><td>Zero Trust controls: challenge-response checks, role-based access, session limits, security audit log</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>End-to-end encryption</h2>
+        <div class="cs-body">
+          <ol class="steps">
+            <li><strong>Key agreement</strong>Each pair of users runs ECDH on the P-256 curve.</li>
+            <li><strong>Key derivation</strong>The shared secret goes through HKDF-SHA256 to derive the message key, never used directly.</li>
+            <li><strong>Authenticated encryption</strong>Messages are encrypted with AES-256-GCM, so tampering is detected, not just hidden. The server routes ciphertext it cannot read.</li>
+            <li><strong>Session hygiene</strong>Sessions expire on a timer and their key material is cleared, limiting what a later compromise can expose.</li>
+          </ol>
+          <p>The point I took from it: the cryptography was the easy part. Most of the effort went into everything around it, including key lifetime, error paths that leak nothing, and keeping secrets out of logs and source control.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="next">
+      <div class="wrap">
+        <a href="securemind.html"><span>Back to the flagship</span><strong>SecureMind</strong></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span data-year>2026</span> Chandhu Allam</p>
+      <nav aria-label="Footer">
+        <a href="../#work">Work</a>
+        <a href="../resume.html">Résumé</a>
+        <a href="https://github.com/Chandhu03" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/chandhuallam422" rel="noopener">LinkedIn</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../assets/js/site.js" defer></script>
+</body>
+</html>

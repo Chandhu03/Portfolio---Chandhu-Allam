@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IoT Sentinel — anomaly detection for IoT networks | Chandhu Allam</title>
+  <meta name="description" content="Case study: an MEng capstone building a two-stage intrusion detection system on CIC IoT-DIAD 2024, and the reproducible data pipeline I own within it.">
+  <meta name="theme-color" content="#020403">
+  <link rel="canonical" href="https://chandhu03.github.io/Portfolio---Chandhu-Allam/work/iot-sentinel.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="IoT Sentinel — anomaly detection for IoT networks">
+  <meta property="og:description" content="Two-stage intrusion detection on CIC IoT-DIAD 2024, with a reproducible data-preparation pipeline.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../">Chandhu Allam</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="../#work" aria-current="page">Work</a>
+        <a href="../#experience">Experience</a>
+        <a href="../#skills">Skills</a>
+        <a href="../resume.html">Résumé</a>
+        <a href="../#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="cs-hero" style="--tone: rgba(40, 60, 58, 0.75)">
+      <div class="wrap">
+        <a class="back" href="../#work">Back to selected work</a>
+        <h1>IoT Sentinel</h1>
+        <p class="dek">Detecting attacks on IoT networks without relying on labels: a two-stage intrusion detection system built as an MEng capstone, and the reproducible data pipeline I own inside it.</p>
+        <dl class="cs-meta">
+          <div><dt>Type</dt><dd>ECE 597 capstone, four-person team, University of Victoria</dd></div>
+          <div><dt>My role</dt><dd>Data preparation: sampling, analysis, cleaning, scaling, feature selection</dd></div>
+          <div><dt>Stack</dt><dd>Python, pandas, NumPy, scikit-learn, XGBoost, Matplotlib</dd></div>
+          <div><dt>Data</dt><dd><a href="https://www.unb.ca/cic/datasets/iot-diad-2024.html" rel="noopener">CIC IoT-DIAD 2024</a> (Canadian Institute for Cybersecurity)</dd></div>
+        </dl>
+        <div class="notice"><p>This page separates three things: work I completed, work I have in progress, and results the team produced. The team repository is private; code walkthroughs are available on request.</p></div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>Why IoT needs this</h2>
+        <div class="cs-body">
+          <p>IoT devices run stripped-down firmware, are rarely patched, and cannot host a security agent. The network is often the only place to observe them. Signature-based detection catches known attacks; an anomaly detector trained on traffic without attack labels can flag behaviour nobody has written a signature for, at the price of many false alarms.</p>
+          <p>The capstone combines both. Stage one, unsupervised, casts a wide net over packet-level traffic. Stage two, supervised, re-checks each alert using flow-level features. An alert survives only if both stages agree, which targets the problem a SOC analyst actually has: too many alerts to review.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>System design</h2>
+        <div class="cs-body">
+          <figure class="diagram">
+            <svg viewBox="0 0 960 250" role="img" aria-labelledby="iot-t iot-d">
+              <title id="iot-t">Two-stage intrusion detection cascade</title>
+              <desc id="iot-d">Packet-level traffic goes to an unsupervised ensemble of an autoencoder, an isolation forest and k-means whose standardized scores are averaged. Its alerts are re-checked by a supervised XGBoost classifier on flow-level features. An alert is raised only when both stages agree.</desc>
+              <defs><marker id="ia" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8fa8a4"/></marker></defs>
+              <g font-size="13" fill="#e8dfd0">
+                <rect x="10" y="95" width="140" height="60" rx="4" fill="#141413" stroke="rgba(232,223,208,.25)"/>
+                <text x="80" y="120" text-anchor="middle">IoT traffic</text><text x="80" y="138" text-anchor="middle" fill="#a8a196" font-size="11">packets and flows</text>
+                <rect x="190" y="20" width="300" height="210" rx="6" fill="#1a2324" stroke="rgba(143,168,164,.55)"/>
+                <text x="206" y="44" fill="#8fa8a4" font-size="12">Stage 1: unsupervised, packet level</text>
+                <rect x="210" y="60" width="125" height="40" rx="3" fill="#0f1516" stroke="rgba(232,223,208,.2)"/><text x="272" y="85" text-anchor="middle" font-size="12">Autoencoder</text>
+                <rect x="345" y="60" width="125" height="40" rx="3" fill="#0f1516" stroke="rgba(232,223,208,.2)"/><text x="407" y="85" text-anchor="middle" font-size="12">Isolation Forest</text>
+                <rect x="210" y="110" width="125" height="40" rx="3" fill="#0f1516" stroke="rgba(232,223,208,.2)"/><text x="272" y="135" text-anchor="middle" font-size="12">K-Means (k = 8)</text>
+                <rect x="345" y="110" width="125" height="40" rx="3" fill="#0f1516" stroke="rgba(232,223,208,.2)"/><text x="407" y="135" text-anchor="middle" font-size="12">Z-score average</text>
+                <text x="340" y="180" text-anchor="middle" fill="#a8a196" font-size="11">flags the top 20% most anomalous</text>
+                <text x="340" y="198" text-anchor="middle" fill="#a8a196" font-size="11">high recall, many false positives</text>
+                <rect x="530" y="20" width="240" height="210" rx="6" fill="#141413" stroke="rgba(232,223,208,.25)"/>
+                <text x="546" y="44" fill="#c98c62" font-size="12">Stage 2: supervised, flow level</text>
+                <rect x="550" y="85" width="200" height="50" rx="3" fill="#0f1516" stroke="rgba(232,223,208,.2)"/><text x="650" y="115" text-anchor="middle" font-size="12">XGBoost classifier</text>
+                <text x="650" y="180" text-anchor="middle" fill="#a8a196" font-size="11">re-checks each Stage 1 alert</text>
+                <rect x="810" y="95" width="140" height="60" rx="4" fill="#5f2e1b" stroke="#c98c62"/>
+                <text x="880" y="120" text-anchor="middle">Alert</text><text x="880" y="138" text-anchor="middle" fill="#e6cdb8" font-size="11">both stages agree</text>
+              </g>
+              <g stroke="#8fa8a4" stroke-width="1.4" fill="none" marker-end="url(#ia)">
+                <path d="M150 125H188"/><path d="M490 125H528"/><path d="M770 125H808"/>
+              </g>
+            </svg>
+            <figcaption>The cascade designed by the team. My work sits upstream of it: the data every stage is trained on.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>My part: the data pipeline</h2>
+        <div class="cs-body">
+          <p>CIC IoT-DIAD 2024 is large: millions of packet and flow records across dozens of attack types, distributed as many separate files. Every model in the project depends on how that data is sampled and cleaned, so I built the preparation stage as a reproducible pipeline: one central configuration, one global random seed that every stochastic step derives from, and a JSON report written by every stage.</p>
+          <ol class="steps">
+            <li><strong>Sampling</strong>A seeded, stratified sample of the packet-level data: 50,000 benign packets and up to 5,000 per attack category, across 27 attack categories in 7 attack families. Result: 181,336 rows and 139 columns.</li>
+            <li><strong>Exploratory analysis</strong>Data types, memory footprint (366 MB in memory), missing values (49 columns affected, up to 96.9% missing in one), constant and near-constant features, and duplicated feature pairs, all written to machine-readable reports and figures.</li>
+            <li><strong>Cleaning</strong>Removed two constant columns, dropped one mostly empty column, imputed IP addresses by mode and numeric gaps by median, and checked for infinite values and duplicate rows (none found). 139 columns became 136.</li>
+            <li><strong>Scaling</strong>Outliers clipped, then StandardScaler, chosen because the autoencoder's reconstruction error and k-means distances are both dominated by whichever feature has the largest scale.</li>
+            <li><strong>Feature selection</strong>A variance filter (threshold 1e-5) followed by a correlation filter at |r| &gt; 0.95. Of 132 candidate features, 53 were redundant; 79 remain. The run takes about 8 seconds.</li>
+          </ol>
+          <h3>What the sample looks like</h3>
+          <ul class="bars" aria-label="Rows per traffic family in the 181,336-row sample">
+            <li>Benign <span class="track"><span class="fill fill--cool" style="--v:100%"></span></span><span class="v">50,000</span></li>
+            <li>DDoS <span class="track"><span class="fill" style="--v:73.1%"></span></span><span class="v">36,548</span></li>
+            <li>Web-based <span class="track"><span class="fill" style="--v:60%"></span></span><span class="v">30,000</span></li>
+            <li>Reconnaissance <span class="track"><span class="fill" style="--v:50%"></span></span><span class="v">25,000</span></li>
+            <li>DoS <span class="track"><span class="fill" style="--v:40%"></span></span><span class="v">20,000</span></li>
+            <li>Spoofing <span class="track"><span class="fill" style="--v:20%"></span></span><span class="v">10,000</span></li>
+            <li>Brute force <span class="track"><span class="fill" style="--v:10%"></span></span><span class="v">5,000</span></li>
+            <li>Mirai <span class="track"><span class="fill" style="--v:9.6%"></span></span><span class="v">4,788</span></li>
+          </ul>
+          <h3>From 139 columns to 79 features</h3>
+          <ul class="bars" aria-label="Feature count after each stage">
+            <li>Raw sample <span class="track"><span class="fill fill--cool" style="--v:100%"></span></span><span class="v">139</span></li>
+            <li>After cleaning <span class="track"><span class="fill fill--cool" style="--v:97.8%"></span></span><span class="v">136</span></li>
+            <li>Candidate features <span class="track"><span class="fill fill--cool" style="--v:95%"></span></span><span class="v">132</span></li>
+            <li>After selection <span class="track"><span class="fill" style="--v:56.8%"></span></span><span class="v">79</span></li>
+          </ul>
+          <p>Most of the redundancy came from rolling-window statistics computed at several window lengths, and from pairs such as per-IP and per-IP-and-MAC variances that were identical in this data. Removing them matters most for k-means, where duplicated features silently double-weight one signal.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>Team results</h2>
+        <div class="cs-body">
+          <p>These numbers come from the team's evaluation in the final report. Stage 2 and the cascade were built by teammates; I report them because they show what the system achieved, not as my individual work.</p>
+          <div class="figures">
+            <div><b>0.789</b><span>Stage 1 ROC-AUC on packet-level data (flow-level: 0.739)</span></div>
+            <div><b>0.967</b><span>Stage 2 XGBoost ROC-AUC on flow features, F1 0.770</span></div>
+            <div><b>91.9%</b><span>fewer false positives after the cascade: 8,195 down to 665</span></div>
+            <div><b>0.519</b><span>cascade precision, up from 0.083 for Stage 1 alone</span></div>
+          </div>
+          <p>Detection rates varied sharply by attack: volumetric HTTP floods were caught in over 91% of cases, while XSS and brute force, which barely change packet statistics, were caught far less often. That pattern is the honest limit of unsupervised packet-level detection, and the reason Stage 2 exists.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>Status</h2>
+        <div class="cs-body">
+          <ul class="status-board">
+            <li><span class="tag tag--done">Complete</span><span>Central configuration and reproducibility controls, stratified sampling, exploratory analysis, cleaning, scaling and feature selection, all committed with their reports</span></li>
+            <li><span class="tag tag--wip">In progress</span><span>Stratified train, validation and test split; K-Means and autoencoder detectors on the selected feature set; evaluation and figures. Written locally, not yet merged.</span></li>
+            <li><span class="tag tag--plan">Planned</span><span>A z-score baseline (parameters already defined in the configuration) and a comparison of all three unsupervised detectors on the same split</span></li>
+            <li><span class="tag tag--team">Team</span><span>Two-stage cascade, supervised XGBoost stage and the final report</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="next">
+      <div class="wrap">
+        <a href="forensics.html"><span>Next case study</span><strong>Forensic investigations</strong></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span data-year>2026</span> Chandhu Allam</p>
+      <nav aria-label="Footer">
+        <a href="../#work">Work</a>
+        <a href="../resume.html">Résumé</a>
+        <a href="https://github.com/Chandhu03" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/chandhuallam422" rel="noopener">LinkedIn</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../assets/js/site.js" defer></script>
+</body>
+</html>

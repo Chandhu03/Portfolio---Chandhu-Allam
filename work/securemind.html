@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SecureMind — AI-assisted security operations platform | Chandhu Allam</title>
+  <meta name="description" content="Case study: SecureMind, a security operations platform that ingests events, correlates incidents with deterministic rules and only shows AI investigation reports whose every claim cites evidence.">
+  <meta name="theme-color" content="#020403">
+  <link rel="canonical" href="https://chandhu03.github.io/Portfolio---Chandhu-Allam/work/securemind.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SecureMind — AI-assisted security operations platform">
+  <meta property="og:description" content="Ingestion, correlation, incident management and evidence-gated AI investigation reports.">
+  <meta property="og:image" content="https://chandhu03.github.io/Portfolio---Chandhu-Allam/assets/work/securemind-dashboard.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../">Chandhu Allam</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="../#work" aria-current="page">Work</a>
+        <a href="../#experience">Experience</a>
+        <a href="../#skills">Skills</a>
+        <a href="../resume.html">Résumé</a>
+        <a href="../#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="cs-hero">
+      <div class="wrap">
+        <a class="back" href="../#work">Back to selected work</a>
+        <h1>SecureMind</h1>
+        <p class="dek">A security operations platform for triaging events and investigating incidents, built around one rule: an AI-written finding is only shown to an analyst if it cites the evidence it came from.</p>
+        <dl class="cs-meta">
+          <div><dt>Type</dt><dd>Independent project, flagship</dd></div>
+          <div><dt>Status</dt><dd>Local MVP v0.1, running on synthetic data</dd></div>
+          <div><dt>Stack</dt><dd>TypeScript, Fastify, React, Vite, SQLite (node:sqlite), zod</dd></div>
+          <div><dt>Source</dt><dd>Private while in development; walkthrough on request</dd></div>
+        </dl>
+        <div class="notice"><p>Every screenshot on this page is the real application running locally on its synthetic demo dataset (730 generated events). Nothing here is production telemetry, and the synthetic scenarios demonstrate the workflow, not detection accuracy.</p></div>
+      </div>
+    </section>
+
+    <div class="wrap cs-lead-visual">
+      <figure class="cs-figure">
+        <div class="screen"><img src="../assets/work/securemind-dashboard.webp" width="1440" height="900" alt="SecureMind dashboard: six open incidents, four high or critical, 730 stored events, an activity-by-day chart, severity distribution, a high-priority queue and recent events." decoding="async"></div>
+        <figcaption>The analyst dashboard after importing the synthetic dataset: 730 events correlated into 6 incidents, with the high-priority queue first.</figcaption>
+      </figure>
+    </div>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>The problem</h2>
+        <div class="cs-body">
+          <p>Triage is a judgement made under time pressure: is this alert real, and what should happen next? Language models can summarise an incident in seconds, but a fluent summary that invents an IP address or overstates a login success is worse than no summary, because it is hard to catch.</p>
+          <p>SecureMind asks what an investigation assistant looks like when it is not allowed to make things up. Detection stays deterministic and explainable. The model only writes on top of it, and its output is checked against the evidence before anyone sees it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>How an event becomes an incident</h2>
+        <div class="cs-body">
+          <ol class="steps">
+            <li><strong>Ingest</strong>Events arrive through <code>POST /api/v1/events</code> with an ingest-only API key bound to named sources, or through a CLI import that uses the same pipeline. Each item is validated against a strict schema with size limits; invalid items are reported by index while the rest of the batch continues.</li>
+            <li><strong>Normalize and de-duplicate</strong>Timestamps become UTC, names are lower-cased, IPs become indicators. The internal ID is derived from a SHA-256 of source and event ID, so re-sending the same event is idempotent.</li>
+            <li><strong>Correlate</strong>Four pure, unit-tested rules re-evaluate the affected time window and attach findings to an existing incident or open a new one. Severity only rises automatically and is never touched after an analyst overrides it.</li>
+            <li><strong>Triage</strong>Analysts filter, sort and search incidents, change status and severity with a reason, and add notes labelled as observation, hypothesis or decision.</li>
+            <li><strong>Investigate</strong>On demand, the server builds a bounded evidence snapshot, sends it to the investigation provider, and stores the report only if it passes validation.</li>
+          </ol>
+          <figure class="cs-figure cs-wide">
+            <div class="screen"><img src="../assets/work/securemind-incidents.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Incident list with filters for status, severity and search, showing six incidents from rules R001 to R004 with entities, event counts and timestamps."></div>
+            <figcaption>The incident queue. Each row names the rule that produced it, so an analyst can see the reason before opening it.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>Architecture</h2>
+        <div class="cs-body">
+          <p>A modular monolith: one Node.js process, one SQLite database, with module boundaries drawn so they can be split later. TypeScript runs end to end, and the event schema and report contract live in a shared package, so the API and the UI cannot drift apart.</p>
+          <figure class="diagram" aria-labelledby="arch-cap">
+            <svg viewBox="0 0 960 400" role="img" aria-labelledby="arch-title arch-desc">
+              <title id="arch-title">SecureMind architecture</title>
+              <desc id="arch-desc">Integrations and the CLI send events into validation, normalization and storage, then correlation creates incidents. The analyst UI reads incidents through an authenticated API. The investigation service sends a bounded evidence snapshot to a provider, either the offline demo or Claude, and a validation gate checks schema and citations before a report is stored.</desc>
+              <defs>
+                <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c98c62"/></marker>
+              </defs>
+              <g font-size="13" fill="#e8dfd0">
+                <rect x="10" y="40" width="130" height="54" rx="4" fill="#141413" stroke="rgba(232,223,208,.25)"/>
+                <text x="75" y="63" text-anchor="middle">Integrations</text><text x="75" y="81" text-anchor="middle" fill="#a8a196" font-size="11">API key, per source</text>
+                <rect x="10" y="114" width="130" height="54" rx="4" fill="#141413" stroke="rgba(232,223,208,.25)"/>
+                <text x="75" y="137" text-anchor="middle">CLI import</text><text x="75" y="155" text-anchor="middle" fill="#a8a196" font-size="11">same pipeline</text>
+
+                <rect x="180" y="20" width="770" height="250" rx="6" fill="none" stroke="rgba(201,140,98,.45)" stroke-dasharray="4 5"/>
+                <text x="196" y="40" fill="#c98c62" font-size="12">Server process (Fastify)</text>
+
+                <rect x="200" y="70" width="120" height="54" rx="4" fill="#1a2324" stroke="rgba(143,168,164,.5)"/>
+                <text x="260" y="93" text-anchor="middle">Validate</text><text x="260" y="111" text-anchor="middle" fill="#a8a196" font-size="11">strict schema</text>
+                <rect x="345" y="70" width="120" height="54" rx="4" fill="#1a2324" stroke="rgba(143,168,164,.5)"/>
+                <text x="405" y="93" text-anchor="middle">Normalize</text><text x="405" y="111" text-anchor="middle" fill="#a8a196" font-size="11">UTC, indicators</text>
+                <rect x="490" y="70" width="120" height="54" rx="4" fill="#1a2324" stroke="rgba(143,168,164,.5)"/>
+                <text x="550" y="93" text-anchor="middle">Store</text><text x="550" y="111" text-anchor="middle" fill="#a8a196" font-size="11">dedupe, 1 txn</text>
+                <rect x="635" y="70" width="140" height="54" rx="4" fill="#1a2324" stroke="rgba(143,168,164,.5)"/>
+                <text x="705" y="93" text-anchor="middle">Correlate</text><text x="705" y="111" text-anchor="middle" fill="#a8a196" font-size="11">rules R001–R004</text>
+                <rect x="800" y="70" width="130" height="54" rx="4" fill="#5f2e1b" stroke="#c98c62"/>
+                <text x="865" y="93" text-anchor="middle">Incidents</text><text x="865" y="111" text-anchor="middle" fill="#e6cdb8" font-size="11">+ audit log</text>
+
+                <rect x="200" y="180" width="170" height="60" rx="4" fill="#141413" stroke="rgba(232,223,208,.25)"/>
+                <text x="285" y="204" text-anchor="middle">Investigation service</text><text x="285" y="222" text-anchor="middle" fill="#a8a196" font-size="11">bounded snapshot</text>
+                <rect x="400" y="180" width="170" height="60" rx="4" fill="#141413" stroke="rgba(232,223,208,.25)"/>
+                <text x="485" y="204" text-anchor="middle">Provider</text><text x="485" y="222" text-anchor="middle" fill="#a8a196" font-size="11">demo (default) or Claude</text>
+                <rect x="600" y="180" width="175" height="60" rx="4" fill="#5f2e1b" stroke="#c98c62"/>
+                <text x="687" y="204" text-anchor="middle">Evidence gate</text><text x="687" y="222" text-anchor="middle" fill="#e6cdb8" font-size="11">schema + citation checks</text>
+
+                <rect x="200" y="320" width="575" height="60" rx="4" fill="#141413" stroke="rgba(232,223,208,.25)"/>
+                <text x="487" y="345" text-anchor="middle">Analyst UI (React)</text><text x="487" y="363" text-anchor="middle" fill="#a8a196" font-size="11">session auth, roles: viewer / analyst / admin, CSRF header, CSP</text>
+                <rect x="800" y="320" width="130" height="60" rx="4" fill="#141413" stroke="rgba(232,223,208,.25)"/>
+                <text x="865" y="345" text-anchor="middle">SQLite</text><text x="865" y="363" text-anchor="middle" fill="#a8a196" font-size="11">WAL, prepared stmts</text>
+              </g>
+              <g stroke="#c98c62" stroke-width="1.4" fill="none" marker-end="url(#ah)">
+                <path d="M140 67H190V97H198"/><path d="M140 141H190V97"/>
+                <path d="M320 97H343"/><path d="M465 97H488"/><path d="M610 97H633"/><path d="M775 97H798"/>
+                <path d="M865 124V160H285V178"/>
+                <path d="M370 210H398"/><path d="M570 210H598"/>
+                <path d="M687 240V318"/>
+                <path d="M865 124V318"/>
+              </g>
+            </svg>
+            <figcaption id="arch-cap">Data flow from event to report. The two umber blocks are where trust is decided: incidents (deterministic) and the evidence gate (model output).</figcaption>
+          </figure>
+          <div class="table-wrap">
+            <table class="data">
+              <caption>Key technical decisions, recorded as architecture decision records in the repository</caption>
+              <thead><tr><th>Decision</th><th>Why</th><th>Trade-off</th></tr></thead>
+              <tbody>
+                <tr><td>TypeScript modular monolith</td><td>One language; shared zod schemas keep API contract and UI types in sync</td><td>Single process; boundaries designed for a later split</td></tr>
+                <tr><td>SQLite first, via built-in <code>node:sqlite</code></td><td>Transactional, zero native builds, zero operations for an MVP</td><td>Single writer; PostgreSQL migration path documented</td></tr>
+                <tr><td>Provider-independent investigation</td><td>App works offline with no API key; any model must pass the same gate</td><td>Strict gate rejects some useful reports, by design</td></tr>
+                <tr><td>Ingest keys bound to sources</td><td>A stolen key cannot submit events for other sources or read data</td><td>Key holder can still fabricate events for its own sources</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>Detection rules</h2>
+        <div class="cs-body">
+          <p>Detection is deterministic on purpose. Each rule is a pure function with fixed thresholds and a plain-language explanation that appears on the incident, so an analyst can see exactly why it fired.</p>
+          <div class="table-wrap">
+            <table class="data">
+              <thead><tr><th>Rule</th><th>Logic</th><th>Severity</th></tr></thead>
+              <tbody>
+                <tr><td>R001</td><td>Five or more failed logins for one account within 15 minutes; escalates if a success follows within 30 minutes</td><td>Medium, high with success</td></tr>
+                <tr><td>R002</td><td>MFA disabled, API token created or privileged role assigned for a user within 24 hours</td><td>Medium, raised for repeat changes or a preceding brute-force pattern</td></tr>
+                <tr><td>R003</td><td>One source reaches 15 or more distinct address:port targets in 10 minutes, then egresses on an uncommon port</td><td>Medium, high with egress</td></tr>
+                <tr><td>R004</td><td>Upstream alerts of high severity or above, grouped per host and type within an hour</td><td>Highest alert severity</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>The evidence gate</h2>
+        <div class="cs-body">
+          <p>The investigation assistant sits behind a one-method provider interface. The default provider is an offline, deterministic demo that restates rule logic and labels itself as demo output; an optional Claude provider uses structured JSON output. Whichever provider runs, its report passes through the same validator before it is stored:</p>
+          <ul>
+            <li>The report must match the schema exactly.</li>
+            <li>Every section must cite event IDs, and every cited ID must exist in the evidence snapshot. One unknown ID rejects the whole report.</li>
+            <li>IP addresses, user and host names, ports and counts in each claim must appear in the events that claim cites; an unrelated valid citation does not pass.</li>
+            <li>Speculative wording is barred from observations, and hypotheses that go beyond their evidence must be marked low confidence.</li>
+            <li>Recommendations with consequences are force-flagged for human approval. No automated response actions exist.</li>
+          </ul>
+          <p>Event content is untrusted. Before evidence reaches a model it is serialised as JSON with <code>&lt;</code>, <code>&gt;</code> and <code>&amp;</code> escaped, so a malicious event cannot close the evidence delimiter and inject instructions; regression tests cover that payload.</p>
+          <figure class="cs-figure cs-wide">
+            <div class="screen"><img src="../assets/work/securemind-investigation.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Incident detail for a network scan followed by an external connection: rule explanation, a demo-mode investigation summary with event citations, cited observed facts, affected entities and indicators."></div>
+            <figcaption>A network-scan incident. The investigation summary and every observed fact carry clickable citations (#1 to #27) back to the events in the timeline.</figcaption>
+          </figure>
+          <p>The limits are stated in the product, not hidden. Passing the gate proves a report is structured and grounded in real evidence; it does not prove the interpretation is correct. A supported identifier can still be described wrongly, and that residual risk is recorded in the threat model.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>Security engineering</h2>
+        <div class="cs-body">
+          <p>A security tool is a target, so the platform has its own STRIDE threat model with a residual-risk column, not just a list of mitigations. A selection:</p>
+          <div class="table-wrap">
+            <table class="data">
+              <thead><tr><th>Threat</th><th>Mitigation in v0.1</th><th>Residual risk</th></tr></thead>
+              <tbody>
+                <tr><td>Credential guessing on login</td><td>scrypt hashes, generic errors, 10 attempts per minute per IP, failed logins audited</td><td>No per-account lockout or MFA yet</td></tr>
+                <tr><td>Poisoned telemetry creating misleading incidents</td><td>Authenticated ingestion, source-bound keys, server-assigned data class, strict schema</td><td>High: a key holder can fabricate events for its own sources</td></tr>
+                <tr><td>Prompt injection through event content</td><td>Escaped JSON evidence, instructions forbidden in system prompt, schema-constrained output, per-claim grounding</td><td>Medium: not yet tested against a live model</td></tr>
+                <tr><td>XSS through event content or notes</td><td>Text-only rendering, raw HTML injection banned by lint rule, CSP <code>script-src 'self'</code></td><td>Low</td></tr>
+                <tr><td>SQL injection through filters</td><td>Prepared statements, allow-listed sort columns, escaped LIKE wildcards, tested</td><td>Low</td></tr>
+                <tr><td>Analyst denies making a change</td><td>Append-only audit log with actor, time, before and after values, and reason</td><td>Log is not yet tamper-evident</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Other controls: HttpOnly SameSite=Strict session cookies, a required CSRF header on writes, CORS and Origin allow-lists, body-size and batch limits, a trusted-proxy setting that refuses wildcards, and a secret scanner in the check pipeline.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap cs-grid">
+        <h2>Status and what is next</h2>
+        <div class="cs-body">
+          <div class="figures">
+            <div><b>175</b><span>automated tests passing (166 server, 9 web)</span></div>
+            <div><b>4</b><span>correlation rules, each unit-tested</span></div>
+            <div><b>18</b><span>threats in the threat model, each with residual risk</span></div>
+            <div><b>4</b><span>architecture decision records</span></div>
+          </div>
+          <ul class="status-board">
+            <li><span class="tag tag--done">Done</span><span>Ingestion, correlation, incident management, evidence-gated investigation reports, analyst UI with light and dark themes, roles, audit log, synthetic dataset</span></li>
+            <li><span class="tag tag--wip">Next</span><span>CI with gitleaks and semgrep, an independent security review of v0.1, API-key list and revoke commands, end-to-end browser tests</span></li>
+            <li><span class="tag tag--plan">Planned</span><span>Cross-rule incident linking, entity pages, enrichment from asset and identity sources, a model-evaluation harness for citation precision and hallucination rate</span></li>
+            <li><span class="tag tag--plan">Planned</span><span>Real connectors (syslog/CEF, cloud audit logs), detection-as-code, PostgreSQL, SSO with MFA, multi-tenancy</span></li>
+          </ul>
+          <h3>How it is built</h3>
+          <p>SecureMind uses a documented, AI-assisted engineering workflow: product scope, architecture decisions, the threat model and security requirements are written first, implementation is done with AI coding agents against those specs, and a separate agent performs independent review and testing. Every change has to pass formatting, linting, type checks, the test suite and a secret scan.</p>
+          <h3>Known limitations</h3>
+          <ul>
+            <li>Single tenant, single process, SQLite; not built for concurrent multi-node deployment or high event volumes.</li>
+            <li>Users are managed from the command line; no SSO, MFA, password reset or account lockout.</li>
+            <li>The demo provider restates rule logic; it does not reason about intent.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="next">
+      <div class="wrap">
+        <a href="phishguard.html"><span>Next case study</span><strong>PhishGuard</strong></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span data-year>2026</span> Chandhu Allam</p>
+      <nav aria-label="Footer">
+        <a href="../#work">Work</a>
+        <a href="../resume.html">Résumé</a>
+        <a href="https://github.com/Chandhu03" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/chandhuallam422" rel="noopener">LinkedIn</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../assets/js/site.js" defer></script>
+</body>
+</html>

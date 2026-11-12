@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Replace https://YOUR-DOMAIN.example with this portfolio's deployed HTTPS origin.
-     For GitHub Pages this is usually https://<username>.github.io/<repository>/ -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://YOUR-DOMAIN.example/</loc>
-  </url>
-  <url>
-    <loc>https://YOUR-DOMAIN.example/projects.html</loc>
-  </url>
-  <url>
-    <loc>https://YOUR-DOMAIN.example/projects/ece-567-capstone.html</loc>
-  </url>
-  <url>
-    <loc>https://YOUR-DOMAIN.example/projects/ece-570-digital-forensics.html</loc>
-  </url>
-  <url>
-    <loc>https://YOUR-DOMAIN.example/projects/iot-intrusion-detection.html</loc>
-  </url>
-  <url>
-    <loc>https://YOUR-DOMAIN.example/projects/securetext.html</loc>
-  </url>
-  <url>
-    <loc>https://YOUR-DOMAIN.example/resume.html</loc>
-  </url>
+  <url><loc>https://chandhu03.github.io/Portfolio---Chandhu-Allam/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://chandhu03.github.io/Portfolio---Chandhu-Allam/resume.html</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://chandhu03.github.io/Portfolio---Chandhu-Allam/work/securemind.html</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://chandhu03.github.io/Portfolio---Chandhu-Allam/work/phishguard.html</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://chandhu03.github.io/Portfolio---Chandhu-Allam/work/iot-sentinel.html</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://chandhu03.github.io/Portfolio---Chandhu-Allam/work/forensics.html</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://chandhu03.github.io/Portfolio---Chandhu-Allam/work/securetext.html</loc><lastmod>2026-11-11</lastmod></url>
 </urlset>
