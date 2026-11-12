@@ -49,7 +49,7 @@ body {
   font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Film grain over everything; pointer-events none so it never blocks input. */
@@ -552,8 +552,9 @@ table.data { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-widt
 
 @media print {
   @page { margin: 14mm 14mm; }
-  :root { --bone: #111; --ash: #333; --smoke: #555; --ember: #5f2e1b; --line: #ccc; --line-strong: #999; }
-  body { background: #fff; color: #111; font-size: 10pt; line-height: 1.4; }
+  :root { color-scheme: light; --bone: #111; --ash: #333; --smoke: #555; --ember: #5f2e1b; --line: #ccc; --line-strong: #999; }
+  html, body { background: #fff !important; }
+  body { color: #111; font-size: 10pt; line-height: 1.4; }
   body::after, .site-header, .site-footer, .no-print, .skip-link { display: none !important; }
   .resume { padding: 0; }
   .wrap { padding: 0; max-width: none; }

@@ -11,7 +11,7 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="PhishGuard — phishing-URL detection, evaluated honestly">
   <meta property="og:description" content="Four classifiers, a domain-split re-evaluation, a hardened demo and an in-browser URL dissector.">
-  <meta property="og:image" content="https://chandhu03.github.io/Portfolio---Chandhu-Allam/assets/work/phishguard-dissector.webp">
+  <meta property="og:image" content="https://chandhu03.github.io/Portfolio---Chandhu-Allam/assets/img/og.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -56,7 +56,7 @@
             <div><b>95.2%</b><p>Logistic-regression accuracy on a random 80/20 split of a 10,000-URL benchmark. The headline of the course project.</p></div>
             <div><b>10.6%</b><p>Share of phishing URLs the deployed demo model catches on held-out websites from a public dataset (PhiUSIIL), at its default threshold.</p></div>
           </div>
-          <p>Both numbers are real, and they measure different things. The first is an in-distribution score: training and test URLs come from the same sources, and often the same websites. The second comes from a later re-evaluation in which no website appears in both training and testing. Most of this case study is about the gap between them, because a security tool that is evaluated the first way will be trusted more than it deserves.</p>
+          <p>Both numbers are real, and they describe different models measured in different ways. The first is a benchmark model scored on a random split of the same dataset it was trained on. The second is the prototype that the public demo actually runs, trained on synthetic URLs and scored in a later re-evaluation where no website appears in both training and testing. A demo that displays the first kind of number invites more trust than the second kind of number supports. Closing that gap, honestly, is what most of this project became.</p>
         </div>
       </div>
     </section>

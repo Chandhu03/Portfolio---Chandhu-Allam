@@ -11,7 +11,7 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="SecureMind — AI-assisted security operations platform">
   <meta property="og:description" content="Ingestion, correlation, incident management and evidence-gated AI investigation reports.">
-  <meta property="og:image" content="https://chandhu03.github.io/Portfolio---Chandhu-Allam/assets/work/securemind-dashboard.webp">
+  <meta property="og:image" content="https://chandhu03.github.io/Portfolio---Chandhu-Allam/assets/img/og.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -43,7 +43,7 @@
           <div><dt>Type</dt><dd>Independent project, flagship</dd></div>
           <div><dt>Status</dt><dd>Local MVP v0.1, running on synthetic data</dd></div>
           <div><dt>Stack</dt><dd>TypeScript, Fastify, React, Vite, SQLite (node:sqlite), zod</dd></div>
-          <div><dt>Source</dt><dd>Private while in development; walkthrough on request</dd></div>
+          <div><dt>Source</dt><dd>Private while in development</dd></div>
         </dl>
         <div class="notice"><p>Every screenshot on this page is the real application running locally on its synthetic demo dataset (730 generated events). Nothing here is production telemetry, and the synthetic scenarios demonstrate the workflow, not detection accuracy.</p></div>
       </div>
@@ -238,7 +238,7 @@
             <li><span class="tag tag--plan">Planned</span><span>Real connectors (syslog/CEF, cloud audit logs), detection-as-code, PostgreSQL, SSO with MFA, multi-tenancy</span></li>
           </ul>
           <h3>How it is built</h3>
-          <p>SecureMind uses a documented, AI-assisted engineering workflow: product scope, architecture decisions, the threat model and security requirements are written first, implementation is done with AI coding agents against those specs, and a separate agent performs independent review and testing. Every change has to pass formatting, linting, type checks, the test suite and a secret scan.</p>
+          <p>SecureMind uses a documented, AI-assisted engineering workflow: product scope, architecture decisions, the threat model and security requirements are written first, implementation is done with AI coding agents against those specs, and changes are reviewed and tested before they merge. A dedicated, independent security review of v0.1 is the next milestone. Every change has to pass formatting, linting, type checks, the test suite and a secret scan.</p>
           <h3>Known limitations</h3>
           <ul>
             <li>Single tenant, single process, SQLite; not built for concurrent multi-node deployment or high event volumes.</li>
